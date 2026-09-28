@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05070c">
+<title>DREAMSELL – Achetez, Vendez et Investissez dans des projets innovants</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05070c;--card:#0b101b;--card2:#101726;--line:rgba(148,163,184,.12);--blue:#1e8fff;--cyan:#22c3ff;--muted:#8b97ab}
+*{-webkit-tap-highlight-color:transparent;box-sizing:border-box}
+html,body{background:var(--bg);color:#fff;font-family:'Poppins',system-ui,-apple-system,sans-serif}
+body{min-height:100vh;overflow-x:hidden}
+.bg-app{background:radial-gradient(900px 520px at 85% -8%,rgba(30,143,255,.13),transparent 60%),radial-gradient(700px 480px at -10% 35%,rgba(34,195,255,.06),transparent 60%),var(--bg);background-attachment:fixed}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:20px}
+.card-solid{background:var(--card);border:1px solid var(--line);border-radius:20px}
+.hero-bg{background:radial-gradient(420px 300px at 85% 50%,rgba(30,143,255,.28),transparent 70%),linear-gradient(135deg,#0b1222 0%,#070b14 60%,#060912 100%)}
+.glow{box-shadow:0 0 0 1px rgba(30,143,255,.35),0 12px 40px -12px rgba(30,143,255,.6)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:600;border-radius:14px;transition:all .2s;white-space:nowrap;cursor:pointer}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-primary{background:linear-gradient(135deg,#2ea0ff,#0a6cff);color:#fff;box-shadow:0 10px 30px -8px rgba(30,143,255,.7)}
+.btn-primary:hover:not(:disabled){filter:brightness(1.1);transform:translateY(-1px)}
+.btn-ghost{background:rgba(255,255,255,.04);border:1px solid rgba(148,163,184,.22);color:#fff}
+.btn-ghost:hover{border-color:rgba(30,143,255,.6);background:rgba(30,143,255,.08)}
+.btn-danger{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.35);color:#fca5a5}
+.text-blue{color:var(--blue)}.text-muted{color:var(--muted)}
+.input{width:100%;background:#0a0f19;border:1px solid var(--line);border-radius:14px;padding:.8rem 1rem;color:#fff;outline:none;transition:.2s;font-size:.9rem;font-family:inherit}
+.input:focus{border-color:rgba(30,143,255,.7);box-shadow:0 0 0 3px rgba(30,143,255,.15)}
+.input::placeholder{color:#5b6679}
+select.input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%238b97ab' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.6rem}
+select.input option{background:#0b101b}
+textarea.input{resize:vertical;min-height:110px}
+.label{font-size:.78rem;color:#aab4c5;margin-bottom:.45rem;display:block;font-weight:500}
+.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{scrollbar-width:none}
+.icon-btn{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.2s;position:relative;flex-shrink:0;color:#e5ecf6}
+.icon-btn:hover{border-color:rgba(30,143,255,.5);color:#fff}
+.chip{display:inline-flex;align-items:center;gap:.35rem;font-size:11px;font-weight:500;padding:.3rem .65rem;border-radius:999px;background:rgba(30,143,255,.12);color:#7cc0ff;border:1px solid rgba(30,143,255,.3)}
+.pill{padding:.5rem .95rem;border-radius:999px;font-size:.8rem;border:1px solid var(--line);background:rgba(255,255,255,.03);color:#cbd5e1;transition:.2s;white-space:nowrap;cursor:pointer}
+.pill.on,.pill:hover{border-color:rgba(30,143,255,.65);background:rgba(30,143,255,.14);color:#fff}
+.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#6f7b90;height:100%;position:relative;transition:.2s}
+.nav-item.active{color:var(--blue)}
+.nav-item.active svg{filter:drop-shadow(0 0 8px rgba(30,143,255,.85))}
+.side-link{display:flex;align-items:center;gap:.8rem;padding:.72rem .95rem;border-radius:14px;color:#9aa6b8;font-size:.9rem;transition:.2s}
+.side-link:hover{background:rgba(255,255,255,.04);color:#fff}
+.side-link.active{background:rgba(30,143,255,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(30,143,255,.35)}
+.side-link.active svg{color:var(--blue)}
+.fav-btn svg{transition:.2s}
+.fav-btn.is-fav svg{fill:#ff4d6d;stroke:#ff4d6d}
+.fav-btn:active{transform:scale(.9)}
+.fade-in{animation:fi .35s ease both}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.rocket-float{animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(4px,-10px)}}
+.flame{animation:flame .12s infinite alternate;transform-box:fill-box;transform-origin:50% 0}
+@keyframes flame{to{transform:scaleY(1.18) scaleX(.92)}}
+.twinkle{animation:tw 2.4s ease-in-out infinite}
+@keyframes tw{50%{opacity:.2}}
+.safe-b{padding-bottom:max(env(safe-area-inset-bottom),0px)}
+.toggle{width:44px;height:26px;border-radius:999px;background:#1c2536;position:relative;transition:.2s;flex-shrink:0;cursor:pointer}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
+.toggle.on{background:var(--blue)}.toggle.on::after{left:21px}
+.line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.line-clamp-3{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.dropzone{border:1.5px dashed rgba(30,143,255,.45);background:rgba(30,143,255,.05);border-radius:18px;transition:.2s}
+.dropzone.drag{background:rgba(30,143,255,.14);border-color:var(--blue)}
+.otp{width:46px;height:54px;text-align:center;font-size:1.3rem;font-weight:600}
+#sheet.open{pointer-events:auto}#sheet.open .sheet-bg{opacity:1}#sheet.open .sheet-panel{transform:none;opacity:1}
+#drawer.open{pointer-events:auto}#drawer.open .drawer-bg{opacity:1}#drawer.open .drawer-panel{transform:none}
+::selection{background:rgba(30,143,255,.4)}
+</style>
+</head>
+<body class="bg-app">
+
+<!-- Barre latérale ordinateur -->
+<aside id="sidebar" class="hidden lg:flex fixed inset-y-0 left-0 w-64 flex-col border-r border-[var(--line)] bg-[#060910]/90 backdrop-blur-xl z-30 p-5"></aside>
+
+<!-- Contenu -->
+<main id="view" class="lg:pl-64 min-h-screen"></main>
+
+<!-- Navigation mobile -->
+<nav id="bottomNav" class="fixed bottom-0 inset-x-0 z-40 lg:hidden"></nav>
+
+<!-- Menu latéral (hamburger) -->
+<div id="drawer" class="fixed inset-0 z-50 pointer-events-none">
+  <div class="drawer-bg absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 transition" data-action="close-drawer"></div>
+  <div class="drawer-panel absolute inset-y-0 left-0 w-[82%] max-w-[320px] bg-[#070a12] border-r border-[var(--line)] -translate-x-full transition duration-300 p-5 overflow-y-auto"></div>
+</div>
+
+<!-- Feuille modale -->
+<div id="sheet" class="fixed inset-0 z-50 pointer-events-none flex items-end md:items-center justify-center">
+  <div class="sheet-bg absolute inset-0 bg-black/65 backdrop-blur-sm opacity-0 transition" data-action="close-sheet"></div>
+  <div class="sheet-panel relative w-full md:max-w-lg max-h-[90vh] overflow-y-auto bg-[#0a0e18] border border-[var(--line)] rounded-t-[28px] md:rounded-[28px] p-5 md:p-6 translate-y-full md:translate-y-6 opacity-0 transition duration-300 safe-b"></div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed top-4 left-1/2 -translate-x-1/2 z-[60] pointer-events-none flex flex-col gap-2 items-center w-[92%] max-w-sm"></div>
+
+<script>
+/* ==========================================================================
+   DREAMSELL – Application monopage (SPA)
+   Architecture :
+   1. Utilitaires & icônes      4. Services (Auth, Projects, Favs, Messages, Notifs)
+   2. Données de démonstration  5. Composants UI réutilisables
+   3. Adaptateur de stockage    6. Routeur + Vues
+   Le stockage passe par "Store" (localStorage). Pour la production, remplacer
+   les méthodes des services par des appels API (Next.js / Supabase / Firebase)
+   sans toucher aux vues.
+   ========================================================================== */
+
+/* ---------- 1. UTILITAIRES ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid = (p = 'id') => p + '-' + Math.random().toString(36).slice(2, 9) + Date.now().toString(36).slice(-4);
+const fmtNum = n => Number(n || 0).toLocaleString('fr-FR').replace(/[\u202f\u00a0]/g, ' ');
+const fmt = n => fmtNum(n) + ' FCFA';
+const debounce = (fn, ms = 250) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+function timeAgo(ts) {
+  const s = Math.floor((Date.now() - ts) / 1000);
+  if (s < 60) return "à l'instant";
+  if (s < 3600) return `il y a ${Math.floor(s / 60)} min`;
+  if (s < 86400) return `il y a ${Math.floor(s / 3600)} h`;
+  if (s < 604800) return `il y a ${Math.floor(s / 86400)} j`;
+  return new Date(ts).toLocaleDateString('fr-FR');
+}
+const px = (id, w = 900, h = 640) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=${h}&w=${w}`;
+
+const I = {
+  menu:'<path d="M4 7h16M4 12h16M4 17h10"/>',
+  bell:'<path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+  sliders:'<path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/>',
+  arrowR:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  compass:'<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
+  msg:'<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  heart:'<path d="M12 20s-7-4.4-9.2-8.6C1.3 8.4 3 5 6.5 5c2 0 3.5 1.2 5.5 3 2-1.8 3.5-3 5.5-3C21 5 22.7 8.4 21.2 11.4 19 15.6 12 20 12 20z"/>',
+  share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/>',
+  back:'<path d="M15 18l-6-6 6-6"/>',
+  chevR:'<path d="m9 6 6 6-6 6"/>',
+  chevL:'<path d="m15 6-6 6 6 6"/>',
+  check:'<path d="M5 12.5 10 17l9-10"/>',
+  star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+  pin:'<path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+  cpu:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/>',
+  leaf:'<path d="M5 19c0-8 5-14 15-15-1 10-7 15-15 15z"/><path d="M5 19 13 11"/>',
+  shirt:'<path d="M8 3 3 6l2 5 3-1v11h8V10l3 1 2-5-5-3a4 4 0 0 1-8 0z"/>',
+  building:'<rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1M10 21v-3h4v3"/>',
+  cap:'<path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5M22 9v5"/>',
+  music:'<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',
+  health:'<path d="M12 21s-8-4.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6.5-8 11-8 11z"/><path d="M8 12h2l1-2 2 4 1-2h2"/>',
+  bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+  coins:'<circle cx="9" cy="9" r="6"/><path d="M15.5 9.5a6 6 0 1 1-6 6"/>',
+  food:'<path d="M4 3v8a3 3 0 0 0 6 0V3M7 3v18M17 3c-2 0-3 3-3 7h3v11"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>',
+  settings:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+  logout:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',
+  image:'<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>',
+  file:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/>',
+  x:'<path d="M18 6 6 18M6 6l12 12"/>',
+  send:'<path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/>',
+  eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  eyeOff:'<path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>',
+  trend:'<path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  layers:'<path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/>',
+  users:'<circle cx="9" cy="8" r="4"/><path d="M1 21a8 8 0 0 1 16 0"/><path d="M16 3.1a4 4 0 0 1 0 7.8M23 21a8 8 0 0 0-5-7.4"/>',
+  shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>',
+  mail:'<rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/>',
+  lock:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  trash:'<path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/>',
+  edit:'<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+  upload:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>',
+  tag:'<path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
+  verified:'<path d="M12 2l2.4 1.8 3-.2.9 2.9 2.5 1.7-1 2.8 1 2.8-2.5 1.7-.9 2.9-3-.2L12 22l-2.4-1.8-3 .2-.9-2.9-2.5-1.7 1-2.8-1-2.8 2.5-1.7.9-2.9 3 .2z"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',
+  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
+  rocket:'<path d="M5 15c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"/><path d="M12 15 9 12a22 22 0 0 1 2-4A12.9 12.9 0 0 1 22 2c0 2.7-.8 7.5-6 11a22 22 0 0 1-4 2z"/><path d="M9 12H4s.6-3 2-4c1.6-1.1 5 0 5 0M12 15v5s3-.6 4-2c1.1-1.6 0-5 0-5"/>',
+  refresh:'<path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>'
+};
+const ic = (n, c = 'w-5 h-5', fill = false) => `<svg viewBox="0 0 24 24" class="${c}" fill="${fill ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${I[n] || ''}</svg>`;
+const googleIcon = `<svg viewBox="0 0 48 48" class="w-5 h-5"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3a12 12 0 0 1-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>`;
+
+/* Logo DREAMSELL : fusée dans une ampoule + DREAM (blanc) SELL (bleu) */
+function logoMark(c = 'w-8 h-8') {
+  return `<svg viewBox="0 0 48 48" class="${c}" fill="none">
+  <defs><linearGradient id="dsLg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5cc8ff"/><stop offset="1" stop-color="#1e6fff"/></linearGradient></defs>
+  <path d="M24 4C15.7 4 9 10.5 9 18.6c0 5.3 2.8 9 5.6 11.7 1.5 1.4 2.4 3.3 2.4 5.3V37h14v-1.4c0-2 .9-3.9 2.4-5.3 2.8-2.7 5.6-6.4 5.6-11.7C39 10.5 32.3 4 24 4z" stroke="url(#dsLg)" stroke-width="2.6"/>
+  <path d="M18.5 41h11M20.5 45h7" stroke="url(#dsLg)" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M24 9.5c3 2.5 4.5 6 4.5 10v6.5h-9v-6.5c0-4 1.5-7.5 4.5-10z" fill="url(#dsLg)"/>
+  <circle cx="24" cy="18.5" r="1.9" fill="#05070c"/>
+  <path d="M19.5 21.5l-3 4v3l3-1.5zM28.5 21.5l3 4v3l-3-1.5z" fill="url(#dsLg)"/>
+  <path d="M22 27.5h4l-.9 4.5h-2.2z" fill="#ffb347"/></svg>`;
+}
+function logo(size = 'text-[19px]', mark = 'w-8 h-8') {
+  return `<a href="#/" class="flex items-center gap-2 select-none shrink-0">${logoMark(mark)}<span class="font-extrabold tracking-[.04em] ${size} leading-none"><span class="text-white">DREAM</span><span style="color:var(--blue)">SELL</span></span></a>`;
+}
+
+/* Illustration fusée du hero */
+function rocketSVG() {
+  return `<svg viewBox="0 0 240 260" class="w-full h-full overflow-visible" fill="none">
+  <defs>
+    <radialGradient id="rgGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#1e8fff" stop-opacity=".6"/><stop offset=".6" stop-color="#1e8fff" stop-opacity=".12"/><stop offset="1" stop-color="#1e8fff" stop-opacity="0"/></radialGradient>
+    <linearGradient id="rkBody" x1="0" x2="1"><stop offset="0" stop-color="#f4faff"/><stop offset=".5" stop-color="#b9dcff"/><stop offset="1" stop-color="#4a8dff"/></linearGradient>
+    <linearGradient id="rkBlue" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#40c4ff"/><stop offset="1" stop-color="#1747d6"/></linearGradient>
+    <linearGradient id="rkFlame" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".25" stop-color="#9be3ff"/><stop offset=".6" stop-color="#1e8fff" stop-opacity=".7"/><stop offset="1" stop-color="#1e8fff" stop-opacity="0"/></linearGradient>
+    <filter id="blur10" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+    <filter id="blur4" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+  </defs>
+  <circle cx="130" cy="120" r="120" fill="url(#rgGlow)"/>
+  <ellipse cx="130" cy="135" rx="105" ry="30" stroke="#1e8fff" stroke-opacity=".35" transform="rotate(-20 130 135)"/>
+  <ellipse cx="130" cy="135" rx="80" ry="20" stroke="#22c3ff" stroke-opacity=".2" transform="rotate(-20 130 135)"/>
+  <g fill="#cfe8ff"><circle class="twinkle" cx="40" cy="40" r="1.6"/><circle class="twinkle" style="animation-delay:.6s" cx="210" cy="30" r="1.3"/><circle class="twinkle" style="animation-delay:1.2s" cx="225" cy="150" r="1.8"/><circle class="twinkle" style="animation-delay:.3s" cx="70" cy="110" r="1.2"/><circle class="twinkle" style="animation-delay:1.8s" cx="180" cy="220" r="1.4"/><circle cx="20" cy="170" r="1"/></g>
+  <g class="rocket-float"><g transform="rotate(32 130 120)">
+    <path d="M114 176 Q130 270 146 176Z" fill="#1e8fff" opacity=".7" filter="url(#blur10)"/>
+    <path class="flame" d="M117 176 Q130 250 143 176Z" fill="url(#rkFlame)"/>
+    <path class="flame" d="M123 176 Q130 214 137 176Z" fill="#fff" opacity=".9"/>
+    <path d="M110 138 L88 170 L90 186 L114 168Z" fill="url(#rkBlue)"/>
+    <path d="M150 138 L172 170 L170 186 L146 168Z" fill="url(#rkBlue)"/>
+    <path d="M130 30 C155 52 160 98 155 172 H105 C100 98 105 52 130 30Z" fill="url(#rkBody)"/>
+    <path d="M130 30 C143 41 150 55 152 70 H108 C110 55 117 41 130 30Z" fill="url(#rkBlue)"/>
+    <circle cx="130" cy="102" r="15" fill="#0a1a33" stroke="#40c4ff" stroke-width="4.5"/>
+    <circle cx="124" cy="96" r="4.5" fill="#fff" opacity=".55"/>
+    <rect x="105" y="140" width="50" height="7" fill="url(#rkBlue)"/>
+    <path d="M110 172 H150 L145 182 H115Z" fill="#17325a"/>
+    <path d="M127 150 h6 v38 h-6z" fill="url(#rkBlue)"/>
+  </g></g>
+  <g fill="#d6ebff" filter="url(#blur4)" opacity=".35"><circle cx="40" cy="238" r="22"/><circle cx="70" cy="250" r="18"/><circle cx="15" cy="252" r="16"/><circle cx="58" cy="222" r="12"/></g>
+  </svg>`;
+}
+
+/* ---------- 2. DONNÉES DE DÉMONSTRATION ---------- */
+const CATEGORIES = [
+  { id:'tech', name:'Technologie', icon:'cpu', color:'#3b8bff' },
+  { id:'agri', name:'Agriculture', icon:'leaf', color:'#22c55e' },
+  { id:'mode', name:'Mode', icon:'shirt', color:'#ec4899' },
+  { id:'immo', name:'Immobilier', icon:'building', color:'#f59e0b' },
+  { id:'edu', name:'Éducation', icon:'cap', color:'#a855f7' },
+  { id:'music', name:'Musique', icon:'music', color:'#f43f5e' },
+  { id:'sante', name:'Santé', icon:'health', color:'#14b8a6' },
+  { id:'energie', name:'Énergie', icon:'bolt', color:'#eab308' },
+  { id:'finance', name:'Finance', icon:'coins', color:'#06b6d4' },
+  { id:'food', name:'Alimentation', icon:'food', color:'#f97316' }
+];
+const cat = id => CATEGORIES.find(c => c.id === id) || { id, name:id, icon:'grid', color:'#1e8fff' };
+const OFFER_TYPES = ['Vente', 'Investissement', 'Partenariat'];
+const STAGES = ['Idée', 'Prototype', 'MVP', 'Commercialisation', 'Croissance'];
+
+const ROBOT = [8566538, 37659453, 8566566, 8566628, 8566624];
+function seedData() {
+  const now = Date.now(), d = n => now - n * 86400000;
+  const creators = [
+    { id:'u-jean', name:'Jean M.', role:'Entrepreneur', rating:4.6, reviews:18, location:'Abidjan, Côte d’Ivoire', bio:'Ingénieur agronome passionné par l’agriculture de précision.' },
+    { id:'u-innov', name:'InnovTech', role:'Startup', rating:4.7, reviews:41, location:'Dakar, Sénégal', bio:'Startup spécialisée en robotique et IoT.' },
+    { id:'u-bella', name:'Bella Style', role:'Entrepreneur', rating:4.9, reviews:56, location:'Douala, Cameroun', bio:'Créatrice de mode éthique et locale.' },
+    { id:'u-delivia', name:'Delivia Tech', role:'Entrepreneur', rating:4.8, reviews:32, location:'Abidjan, Côte d’Ivoire', bio:'Nous concevons des robots de livraison autonomes, électriques et connectés, pensés pour les villes africaines.' },
+    { id:'u-kofi', name:'Kofi Immo', role:'Entreprise', rating:4.5, reviews:12, location:'Lomé, Togo', bio:'Promoteur immobilier axé sur l’habitat connecté.' },
+    { id:'u-edu', name:'EduSmart', role:'Startup', rating:4.7, reviews:23, location:'Yaoundé, Cameroun', bio:'Rendre l’éducation numérique accessible partout.' },
+    { id:'u-afro', name:'Afro Waves', role:'Entrepreneur', rating:4.6, reviews:15, location:'Lagos, Nigeria', bio:'Label indépendant de musique afro.' },
+    { id:'u-agro', name:'AgroNova', role:'Startup', rating:4.4, reviews:9, location:'Cotonou, Bénin', bio:'Fermes hydroponiques urbaines.' }
+  ].map(c => ({ ...c, email:c.id.slice(2) + '@demo.dreamsell.com', verified:true, isCreator:true, createdAt:d(200) }));
+
+  const base = { roi:'', duration:'', investors:0, verified:false, docs:[], views:0 };
+  const projects = [
+    { ...base, id:'p-irrigation', title:'Système d’irrigation intelligent', subtitle:'Capteurs IoT pour optimiser l’eau des cultures', category:'agri', creatorId:'u-jean', creatorName:'Jean M.', price:2500000, minInvest:250000, offerType:'Vente', stage:'Prototype', location:'Abidjan, Côte d’Ivoire', images:[px(17765487), px(34182297)], description:'Un système d’irrigation piloté par capteurs d’humidité et application mobile, permettant d’économiser jusqu’à 40 % d’eau (estimation de démonstration).', advantages:['Économie d’eau','Pilotage à distance','Installation simple'], benefits:['Transfert complet du projet','Plans techniques','Accompagnement 3 mois'], roi:'25% / an', duration:'2 - 3 ans', investors:11, verified:true, popular:1, views:1240, tags:['iot','eau','capteurs'], createdAt:d(12) },
+    { ...base, id:'p-robot', title:'Robot livreur autonome', subtitle:'Livraison urbaine sans chauffeur', category:'tech', creatorId:'u-innov', creatorName:'InnovTech', price:5000000, minInvest:500000, offerType:'Investissement', stage:'MVP', location:'Dakar, Sénégal', images:[px(8566628), px(8566566), px(8566624)], description:'Robot électrique de livraison autonome pour les campus et quartiers résidentiels.', advantages:['Livraison 24h/24','Électrique','Suivi en temps réel'], benefits:['Part du capital','Rapports trimestriels'], roi:'30% / an', duration:'3 - 4 ans', investors:18, verified:true, popular:2, views:2310, tags:['robotique','logistique'], createdAt:d(8) },
+    { ...base, id:'p-mode', title:'Marque de vêtements écoresponsables', subtitle:'Mode éthique en tissus locaux recyclés', category:'mode', creatorId:'u-bella', creatorName:'Bella Style', price:1800000, minInvest:150000, offerType:'Vente', stage:'Commercialisation', location:'Douala, Cameroun', images:[px(6461325), px(7679742)], description:'Marque de prêt-à-porter utilisant des tissus africains recyclés, avec boutique en ligne et clientèle existante.', advantages:['Clientèle fidèle','Stock existant','Boutique en ligne'], benefits:['Marque déposée','Fichier clients','Fournisseurs'], roi:'20% / an', duration:'1 - 2 ans', investors:7, verified:true, popular:3, views:980, tags:['textile','ethique'], createdAt:d(20) },
+    { ...base, id:'delivia', title:'Delivia – Robot livreur autonome', subtitle:'Solution de livraison intelligente et écologique', category:'tech', creatorId:'u-delivia', creatorName:'Delivia Tech', price:5000000, minInvest:500000, offerType:'Investissement', stage:'Prototype', location:'Abidjan, Côte d’Ivoire', images:[...ROBOT.map(i => px(i)), px(8566538, 900, 900), px(8566628, 900, 900), px(37659453, 900, 900)], description:'Delivia est un robot livreur autonome conçu pour révolutionner la logistique du dernier kilomètre. Écologique, connecté et sécurisé, il permet des livraisons rapides et à faible coût. Le prototype actuel a parcouru plus de 1 200 km en conditions réelles de test. L’équipe prépare une phase pilote avec des restaurants et pharmacies partenaires, et recherche des partenaires pour industrialiser la production localement.', advantages:['Réduction des coûts de livraison','Livraison rapide et autonome','Zéro émission de CO₂','Technologie 100% africaine'], benefits:['Part du capital du projet','Rapports réguliers','Retour sur investissement','Impact environnemental positif'], roi:'35% / an', duration:'3 - 5 ans', investors:24, verified:true, popular:4, views:3450, tags:['robot','livraison','ecologie'], docs:[{name:'Business plan Delivia.pdf', size:'2,4 Mo'},{name:'Fiche technique prototype.pdf', size:'1,1 Mo'}], createdAt:d(3) },
+    { ...base, id:'p-immo', title:'Résidences connectées Lagoon', subtitle:'Programme de 24 logements intelligents', category:'immo', creatorId:'u-kofi', creatorName:'Kofi Immo', price:45000000, minInvest:2000000, offerType:'Investissement', stage:'Idée', location:'Lomé, Togo', images:[px(36622005), px(38261998)], description:'Programme immobilier de logements connectés et économes en énergie.', advantages:['Forte demande locative','Panneaux solaires'], benefits:['Parts de SCI','Revenus locatifs'], roi:'12% / an', duration:'5 - 7 ans', investors:5, views:640, tags:['logement','solaire'], createdAt:d(30) },
+    { ...base, id:'p-edu', title:'EduSmart – Classe numérique mobile', subtitle:'Tablettes et contenus hors-ligne pour écoles', category:'edu', creatorId:'u-edu', creatorName:'EduSmart', price:3200000, minInvest:300000, offerType:'Partenariat', stage:'MVP', location:'Yaoundé, Cameroun', images:[px(34162714), px(36467885)], description:'Kit de classe numérique fonctionnant sans connexion internet, avec contenus conformes aux programmes.', advantages:['Fonctionne hors-ligne','Contenus locaux'], benefits:['Partenariat commercial','Licence régionale'], roi:'18% / an', duration:'2 - 4 ans', investors:9, verified:true, views:820, tags:['ecole','tablette'], createdAt:d(15) },
+    { ...base, id:'p-music', title:'Studio Beats – Label & studio mobile', subtitle:'Production musicale afro accessible', category:'music', creatorId:'u-afro', creatorName:'Afro Waves', price:1200000, minInvest:100000, offerType:'Vente', stage:'Commercialisation', location:'Lagos, Nigeria', images:[px(7091308), px(7086732)], description:'Studio d’enregistrement mobile et label avec un catalogue d’artistes émergents.', advantages:['Catalogue existant','Matériel inclus'], benefits:['Droits du label','Équipement studio'], views:510, tags:['studio','label'], createdAt:d(40) },
+    { ...base, id:'p-agro', title:'Ferme hydroponique urbaine', subtitle:'Légumes frais cultivés en ville', category:'agri', creatorId:'u-agro', creatorName:'AgroNova', price:3800000, minInvest:400000, offerType:'Investissement', stage:'Prototype', location:'Cotonou, Bénin', images:[px(34182297), px(17765487)], description:'Ferme verticale hydroponique fournissant restaurants et supermarchés.', advantages:['90% d’eau en moins','Récoltes toute l’année'], benefits:['Part du capital','Rapports mensuels'], roi:'22% / an', duration:'3 ans', investors:6, views:430, tags:['hydroponie','legumes'], createdAt:d(6) }
+  ];
+  return { creators, projects };
+}
+
+/* ---------- 3. ADAPTATEUR DE STOCKAGE ---------- */
+const Store = {
+  get(k, d) { try { const v = localStorage.getItem('ds_' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem('ds_' + k, JSON.stringify(v)); return true; } catch (e) { toast('Stockage local plein : réduisez le nombre ou la taille des images.', 'error'); return false; } },
+  del(k) { localStorage.removeItem('ds_' + k); }
+};
+async function hashPwd(pwd, salt) {
+  if (window.crypto?.subtle) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(salt + ':' + pwd));
+    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+  let h = 5381; for (const ch of salt + pwd) h = ((h << 5) + h + ch.charCodeAt(0)) | 0; return 'x' + (h >>> 0).toString(16);
+}
+async function seed(force = false) {
+  if (Store.get('seeded_v1') && !force) return;
+  const { creators, projects } = seedData();
+  const salt = uid('s');
+  const demo = { id:'u-demo', name:'Aminata Diallo', email:'demo@dreamsell.com', salt, pass:await hashPwd('demo1234', salt), verified:true, role:'Investisseuse', location:'Abidjan, Côte d’Ivoire', bio:'Investisseuse passionnée par les startups africaines à impact.', createdAt:Date.now() - 90 * 86400000, rating:0, reviews:0 };
+  Store.set('users', [demo, ...creators]);
+  Store.set('projects', projects);
+  Store.set('favs', { 'u-demo':['delivia', 'p-mode'] });
+  Store.set('convs', [{ id:'c-demo1', userId:'u-demo', creatorId:'u-delivia', projectId:'delivia', unread:1, messages:[
+    { from:'u-demo', text:'Bonjour, votre projet Delivia m’intéresse beaucoup. Avez-vous un business plan ?', at:Date.now() - 7200000 },
+    { from:'u-delivia', text:'Bonjour Aminata ! Merci pour votre intérêt 🙏 Le business plan est disponible dans la section documents. Je reste disponible pour un appel.', at:Date.now() - 3600000 }
+  ]}]);
+  Store.set('notifs', { 'u-demo':[
+    { id:uid('n'), icon:'msg', title:'Nouveau message', text:'Delivia Tech vous a répondu.', link:'messages/c-demo1', read:false, at:Date.now() - 3600000 },
+    { id:uid('n'), icon:'trend', title:'Projet populaire', text:'« Robot livreur autonome » est en tendance cette semaine.', link:'project/p-robot', read:false, at:Date.now() - 86400000 },
+    { id:uid('n'), icon:'rocket', title:'Bienvenue sur DREAMSELL', text:'Explorez les projets et publiez le vôtre.', link:'explore', read:true, at:Date.now() - 5 * 86400000 }
+  ]});
+  Store.set('seeded_v1', true);
+}
+
+/* ---------- 4. SERVICES (couche métier, remplaçable par une API) ---------- */
+const Users = {
+  all: () => Store.get('users', []),
+  get: id => Users.all().find(u => u.id === id),
+  byEmail: e => Users.all().find(u => u.email.toLowerCase() === String(e).trim().toLowerCase()),
+  save(u) { const all = Users.all(); const i = all.findIndex(x => x.id === u.id); i >= 0 ? all[i] = u : all.push(u); Store.set('users', all); return u; }
+};
+
+const Auth = {
+  current() { const id = Store.get('session', null); return id ? Users.get(id) : null; },
+  _code() { return String(Math.floor(100000 + Math.random() * 900000)); },
+  async register({ name, email, password }) {
+    name = name.trim(); email = email.trim().toLowerCase();
+    if (name.length < 2) throw new Error('Veuillez saisir votre nom complet.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Adresse email invalide.');
+    if (password.length < 8) throw new Error('Le mot de passe doit contenir au moins 8 caractères.');
+    if (Users.byEmail(email)) throw new Error('Un compte existe déjà avec cet email.');
+    const salt = uid('s');
+    const u = { id:uid('u'), name, email, salt, pass:await hashPwd(password, salt), verified:false, role:'Membre', location:'', bio:'', createdAt:Date.now(), rating:0, reviews:0 };
+    Users.save(u);
+    return Auth.sendVerification(email);
+  },
+  sendVerification(email) {
+    const code = Auth._code();
+    Store.set('pending_verify', { email, code, exp:Date.now() + 15 * 60000 });
+    return code; // En production : envoyé par email (Resend, SendGrid, Supabase Auth…)
+  },
+  verify(email, code) {
+    const p = Store.get('pending_verify', null);
+    if (!p || p.email !== email) throw new Error('Aucune vérification en attente pour cet email.');
+    if (Date.now() > p.exp) throw new Error('Code expiré, demandez-en un nouveau.');
+    if (p.code !== code) throw new Error('Code incorrect.');
+    const u = Users.byEmail(email); u.verified = true; Users.save(u);
+    Store.del('pending_verify'); Store.set('session', u.id);
+    Notifs.add(u.id, { icon:'rocket', title:'Bienvenue sur DREAMSELL 🎉', text:'Votre email est vérifié. Publiez votre premier projet !', link:'publish' });
+    return u;
+  },
+  async login(email, password) {
+    const u = Users.byEmail(email);
+    if (!u || !u.pass || u.pass !== await hashPwd(password, u.salt)) throw new Error('Email ou mot de passe incorrect.');
+    if (!u.verified) { const code = Auth.sendVerification(u.email); const e = new Error('Veuillez vérifier votre email.'); e.needVerify = true; e.code = code; throw e; }
+    Store.set('session', u.id); return u;
+  },
+  logout() { Store.del('session'); },
+  requestReset(email) {
+    const u = Users.byEmail(email); if (!u || !u.pass) throw new Error('Aucun compte trouvé avec cet email.');
+    const code = Auth._code(); Store.set('pending_reset', { email:u.email, code, exp:Date.now() + 15 * 60000 }); return code;
+  },
+  async resetPassword(email, code, pwd) {
+    const p = Store.get('pending_reset', null);
+    if (!p || p.email !== email.toLowerCase() || p.code !== code) throw new Error('Code invalide.');
+    if (Date.now() > p.exp) throw new Error('Code expiré.');
+    if (pwd.length < 8) throw new Error('Le mot de passe doit contenir au moins 8 caractères.');
+    const u = Users.byEmail(email); u.salt = uid('s'); u.pass = await hashPwd(pwd, u.salt); Users.save(u); Store.del('pending_reset');
+  },
+  async changePassword(oldP, newP) {
+    const u = Auth.current(); if (u.pass !== await hashPwd(oldP, u.salt)) throw new Error('Mot de passe actuel incorrect.');
+    if (newP.length < 8) throw new Error('Le nouveau mot de passe doit contenir au moins 8 caractères.');
+    u.salt = uid('s'); u.pass = await hashPwd(newP, u.salt); Users.save(u);
+  },
+  google() { throw new Error('La connexion Google nécessite un backend configuré (OAuth client ID). Elle sera activée avec Supabase / NextAuth.'); },
+  update(data) { const u = { ...Auth.current(), ...data }; Users.save(u); return u; },
+  deleteAccount() {
+    const u = Auth.current(); Store.set('users', Users.all().filter(x => x.id !== u.id));
+    Store.set('projects', Projects.all().filter(p => p.creatorId !== u.id)); Auth.logout();
+  }
+};
+
+const Projects = {
+  all: () => Store.get('projects', []),
+  get: id => Projects.all().find(p => p.id === id),
+  popular: () => Projects.all().filter(p => p.popular).sort((a, b) => a.popular - b.popular).slice(0, 3),
+  byCreator: id => Projects.all().filter(p => p.creatorId === id).sort((a, b) => b.createdAt - a.createdAt),
+  locations: () => [...new Set(Projects.all().map(p => p.location.split(',')[0].trim()))].sort(),
+  search(f = {}) {
+    const q = norm(f.q);
+    let list = Projects.all().filter(p => {
+      if (q) { const hay = norm([p.title, p.subtitle, p.description, p.creatorName, cat(p.category).name, p.location, p.offerType, p.stage, ...(p.tags || [])].join(' ')); if (!q.split(/\s+/).every(w => hay.includes(w))) return false; }
+      if (f.cat && p.category !== f.cat) return false;
+      if (f.offer && p.offerType !== f.offer) return false;
+      if (f.stage && p.stage !== f.stage) return false;
+      if (f.loc && !p.location.startsWith(f.loc)) return false;
+      if (f.min && p.price < +f.min) return false;
+      if (f.max && p.price > +f.max) return false;
+      return true;
+    });
+    const s = f.sort || 'popular';
+    list.sort(s === 'recent' ? (a, b) => b.createdAt - a.createdAt : s === 'priceAsc' ? (a, b) => a.price - b.price : s === 'priceDesc' ? (a, b) => b.price - a.price : (a, b) => (b.views || 0) - (a.views || 0));
+    return list;
+  },
+  create(data) {
+    const u = Auth.current();
+    const p = { id:uid('p'), creatorId:u.id, creatorName:data.creatorName || u.name, views:0, investors:0, verified:false, createdAt:Date.now(), ...data };
+    const all = Projects.all(); all.unshift(p);
+    if (!Store.set('projects', all)) return null;
+    Notifs.add(u.id, { icon:'rocket', title:'Projet publié 🚀', text:`« ${p.title} » est en ligne. Il sera vérifié par notre équipe.`, link:'project/' + p.id });
+    return p;
+  },
+  remove(id) { Store.set('projects', Projects.all().filter(p => p.id !== id)); },
+  view(id) { const all = Projects.all(); const p = all.find(x => x.id === id); if (p) { p.views = (p.views || 0) + 1; Store.set('projects', all); } }
+};
+
+const Favs = {
+  key: () => Auth.current()?.id || 'guest',
+  list() { return Store.get('favs', {})[Favs.key()] || []; },
+  has: id => Favs.list().includes(id),
+  toggle(id) {
+    const all = Store.get('favs', {}); const k = Favs.key(); const l = all[k] || [];
+    all[k] = l.includes(id) ? l.filter(x => x !== id) : [id, ...l]; Store.set('favs', all); return all[k].includes(id);
+  }
+};
+
+const Messages = {
+  all: () => Store.get('convs', []),
+  save: c => { const all = Messages.all(); const i = all.findIndex(x => x.id === c.id); i >= 0 ? all[i] = c : all.unshift(c); Store.set('convs', all); },
+  mine() { const u = Auth.current(); if (!u) return []; return Messages.all().filter(c => c.userId === u.id || c.creatorId === u.id).sort((a, b) => (b.messages.at(-1)?.at || 0) - (a.messages.at(-1)?.at || 0)); },
+  get: id => Messages.all().find(c => c.id === id),
+  unread: () => Messages.mine().reduce((n, c) => n + (c.userId === Auth.current()?.id ? (c.unread || 0) : 0), 0),
+  start(projectId) {
+    const u = Auth.current(), p = Projects.get(projectId);
+    let c = Messages.all().find(x => x.userId === u.id && x.projectId === projectId);
+    if (!c) { c = { id:uid('c'), userId:u.id, creatorId:p.creatorId, projectId, unread:0, messages:[] }; Messages.save(c); }
+    return c;
+  },
+  send(convId, text) {
+    const u = Auth.current(), c = Messages.get(convId); if (!c || !text.trim()) return;
+    c.messages.push({ from:u.id, text:text.trim(), at:Date.now() }); Messages.save(c);
+    const other = c.userId === u.id ? c.creatorId : c.userId;
+    const otherUser = Users.get(other);
+    if (otherUser?.isCreator) { // Réponse automatique simulée (démo)
+      setTimeout(() => {
+        const cc = Messages.get(convId); const p = Projects.get(cc.projectId);
+        cc.messages.push({ from:other, text:`Merci pour votre message ! Je suis ravi(e) de l’intérêt porté à « ${p?.title || 'mon projet'} ». Je vous réponds en détail très vite. (réponse automatique de démonstration)`, at:Date.now() });
+        cc.unread = (cc.unread || 0) + 1; Messages.save(cc);
+        Notifs.add(u.id, { icon:'msg', title:'Nouveau message', text:`${otherUser.name} vous a répondu.`, link:'messages/' + convId });
+        if (location.hash === '#/messages/' + convId) render(); else { renderChrome(); toast(`💬 ${otherUser.name} vous a répondu`); }
+      }, 1600);
+    } else if (otherUser) {
+      Notifs.add(other, { icon:'msg', title:'Nouveau message', text:`${u.name} vous a écrit.`, link:'messages/' + convId });
+    }
+  },
+  markRead(id) { const c = Messages.get(id); if (c && c.userId === Auth.current()?.id && c.unread) { c.unread = 0; Messages.save(c); } }
+};
+
+const Notifs = {
+  list() { const u = Auth.current(); return u ? (Store.get('notifs', {})[u.id] || []) : []; },
+  add(userId, n) { const all = Store.get('notifs', {}); (all[userId] = all[userId] || []).unshift({ id:uid('n'), read:false, at:Date.now(), ...n }); Store.set('notifs', all); },
+  unread: () => Notifs.list().filter(n => !n.read).length,
+  markAll() { const u = Auth.current(); const all = Store.get('notifs', {}); (all[u.id] || []).forEach(n => n.read = true); Store.set('notifs', all); },
+  read(id) { const u = Auth.current(); const all = Store.get('notifs', {}); const n = (all[u.id] || []).find(x => x.id === id); if (n) n.read = true; Store.set('notifs', all); }
+};
+
+/* ---------- 5. COMPOSANTS UI ---------- */
+function toast(msg, type = 'success') {
+  const el = document.createElement('div');
+  const col = type === 'error' ? 'border-red-500/40 text-red-200' : type === 'info' ? 'border-[rgba(30,143,255,.4)] text-blue-100' : 'border-emerald-500/40 text-emerald-100';
+  el.className = `fade-in w-full px-4 py-3 rounded-2xl bg-[#0c1220]/95 backdrop-blur border ${col} text-sm shadow-2xl`;
+  el.textContent = msg; $('#toast').appendChild(el);
+  setTimeout(() => { el.style.transition = '.3s'; el.style.opacity = 0; setTimeout(() => el.remove(), 300); }, type === 'info' ? 6000 : 3000);
+}
+function openSheet(html, after) {
+  const s = $('#sheet'); $('.sheet-panel', s).innerHTML = `<div class="w-10 h-1.5 rounded-full bg-white/15 mx-auto mb-4 md:hidden"></div>` + html;
+  s.classList.add('open'); document.body.style.overflow = 'hidden'; after && after($('.sheet-panel', s));
+}
+function closeSheet() { $('#sheet').classList.remove('open'); document.body.style.overflow = ''; }
+function openDrawer() { $('#drawer .drawer-panel').innerHTML = navMenu('drawer'); $('#drawer').classList.add('open'); }
+function closeDrawer() { $('#drawer').classList.remove('open'); }
+
+const COLORS = ['#1e8fff', '#a855f7', '#22c55e', '#f59e0b', '#ec4899', '#14b8a6', '#f43f5e', '#06b6d4'];
+function avatar(u, size = 'w-10 h-10', text = 'text-sm') {
+  if (!u) return `<span class="${size} rounded-full bg-[#141c2c] grid place-items-center text-muted shrink-0">${ic('user', 'w-1/2 h-1/2')}</span>`;
+  if (u.avatar) return `<img src="${u.avatar}" alt="" class="${size} rounded-full object-cover shrink-0">`;
+  const ini = u.name.split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+  const c = COLORS[[...u.id].reduce((a, ch) => a + ch.charCodeAt(0), 0) % COLORS.length];
+  return `<span class="${size} ${text} rounded-full grid place-items-center font-semibold shrink-0" style="background:linear-gradient(135deg,${c},${c}88);box-shadow:0 0 0 2px #05070c">${esc(ini)}</span>`;
+}
+function bellBtn() {
+  const n = Notifs.unread();
+  return `<a href="#/notifications" class="icon-btn" aria-label="Notifications">${ic('bell')}${n ? `<span class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-[var(--blue)] text-[10px] font-bold grid place-items-center shadow-[0_0_12px_rgba(30,143,255,.9)]">${n}</span>` : ''}</a>`;
+}
+function avatarBtn() {
+  const u = Auth.current();
+  return `<a href="#/${u ? 'profile' : 'login'}" class="rounded-full p-[2px] bg-gradient-to-br from-[#40c4ff] to-[#1e6fff] shadow-[0_0_18px_-4px_rgba(30,143,255,.9)]" aria-label="Profil">${avatar(u, 'w-[38px] h-[38px]')}</a>`;
+}
+function homeHeader() {
+  const u = Auth.current();
+  return `<header class="flex items-center justify-between pt-5 pb-5 gap-3">
+    <button class="icon-btn lg:hidden" data-action="drawer" aria-label="Menu">${ic('menu')}</button>
+    <div class="lg:hidden">${logo()}</div>
+    <div class="hidden lg:block"><p class="text-muted text-sm">Bonjour${u ? ', ' + esc(u.name.split(' ')[0]) : ''} 👋</p><h1 class="font-semibold text-xl">Découvrez des projets innovants</h1></div>
+    <div class="flex items-center gap-2.5">${bellBtn()}${avatarBtn()}</div></header>`;
+}
+function pageHeader(title, { back = true, right = '', center = null } = {}) {
+  return `<header class="flex items-center justify-between pt-5 pb-5 gap-3">
+    ${back ? `<button class="icon-btn" data-back aria-label="Retour">${ic('back')}</button>` : `<button class="icon-btn lg:invisible" data-action="drawer" aria-label="Menu">${ic('menu')}</button>`}
+    ${center ?? `<h1 class="font-semibold text-[17px] md:text-lg truncate text-center flex-1">${title}</h1>`}
+    <div class="flex gap-2 min-w-[42px] justify-end">${right}</div></header>`;
+}
+function secHead(title, link) {
+  return `<div class="flex items-center justify-between mt-7 mb-3.5"><h2 class="text-[17px] md:text-xl font-semibold">${title}</h2>${link ? `<a href="#/${link}" class="text-[13px] font-medium text-blue hover:underline flex items-center gap-1">Voir tout</a>` : ''}</div>`;
+}
+function favBtn(id, cls = '') {
+  return `<button data-fav="${id}" aria-label="Favori" class="fav-btn w-9 h-9 grid place-items-center rounded-full bg-black/45 backdrop-blur border border-white/10 text-white ${cls} ${Favs.has(id) ? 'is-fav' : ''}">${ic('heart', 'w-[18px] h-[18px]')}</button>`;
+}
+function catCard(c, count) {
+  return `<button data-go="explore?cat=${c.id}" class="card shrink-0 w-[96px] md:w-auto py-4 px-2 flex flex-col items-center gap-2.5 hover:-translate-y-0.5 hover:border-[${c.color}66] transition">
+    <span class="w-12 h-12 rounded-2xl grid place-items-center" style="background:${c.color}1f;color:${c.color};box-shadow:0 0 24px -6px ${c.color}99;border:1px solid ${c.color}44">${ic(c.icon, 'w-6 h-6')}</span>
+    <span class="text-[12px] font-medium text-slate-200">${c.name}</span>${count !== undefined ? `<span class="text-[10px] text-muted -mt-1.5">${count} projet${count > 1 ? 's' : ''}</span>` : ''}</button>`;
+}
+function projectCard(p, cls = 'w-[258px] shrink-0') {
+  const c = cat(p.category), cr = Users.get(p.creatorId) || { id:p.creatorId, name:p.creatorName };
+  return `<article class="card overflow-hidden group cursor-pointer hover:border-[rgba(30,143,255,.45)] hover:shadow-[0_12px_40px_-16px_rgba(30,143,255,.55)] transition ${cls}" data-go="project/${p.id}">
+    <div class="relative aspect-[16/10] overflow-hidden bg-[#0d1422]">
+      <img src="${p.images[0]}" alt="${esc(p.title)}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
+      <span class="absolute top-3 left-3 text-[11px] font-medium px-2.5 py-1 rounded-full backdrop-blur-md flex items-center gap-1" style="background:${c.color}33;color:#fff;border:1px solid ${c.color}77">${ic(c.icon, 'w-3.5 h-3.5')}${c.name}</span>
+      ${favBtn(p.id, 'absolute top-3 right-3')}
+      ${p.verified ? `<span class="absolute bottom-3 left-3 text-[10px] font-medium px-2 py-0.5 rounded-full bg-black/55 backdrop-blur flex items-center gap-1 text-[#7cc0ff]">${ic('verified', 'w-3.5 h-3.5')}Vérifié</span>` : ''}
+    </div>
+    <div class="p-4">
+      <h3 class="font-semibold text-[15px] leading-snug line-clamp-2 min-h-[2.7em]">${esc(p.title)}</h3>
+      <div class="flex items-center gap-2 mt-2 text-xs text-muted">${avatar(cr, 'w-5 h-5', 'text-[8px]')}<span class="truncate">par <span class="text-slate-300">${esc(p.creatorName)}</span></span></div>
+      <div class="flex items-end justify-between mt-3 gap-2"><div><p class="text-[10.5px] text-muted">Prix</p><p class="font-bold text-blue text-[15px] leading-tight">${fmt(p.price)}</p></div><span class="chip">${p.offerType}</span></div>
+      <div class="flex items-center justify-between mt-3 pt-3 border-t border-[var(--line)] text-[11px] text-muted gap-2">
+        <span class="flex items-center gap-1 truncate">${ic('pin', 'w-3.5 h-3.5 shrink-0')}${esc(p.location.split(',')[0])}</span>
+        <span class="flex items-center gap-1">${ic('layers', 'w-3.5 h-3.5')}${p.stage}</span>
+        <span class="flex items-center gap-1">${ic('eye', 'w-3.5 h-3.5')}${fmtNum(p.views || 0)}</span>
+      </div>
+    </div></article>`;
+}
+function emptyState(icon, title, text, cta = '') {
+  return `<div class="card p-8 text-center flex flex-col items-center fade-in"><span class="w-16 h-16 rounded-2xl grid place-items-center bg-[rgba(30,143,255,.12)] text-blue glow mb-4">${ic(icon, 'w-8 h-8')}</span><h3 class="font-semibold text-lg">${title}</h3><p class="text-sm text-muted mt-1 max-w-xs">${text}</p>${cta}</div>`;
+}
+const wrap = (html, cls = '') => `<div class="max-w-md md:max-w-3xl lg:max-w-6xl mx-auto px-4 md:px-6 ${cls}">${html}</div>`;
+
+const NAV = [
+  ['home', '', 'home', 'Accueil'], ['explore', 'explore', 'compass', 'Explorer'], ['search', 'search', 'search', 'Recherche'],
+  ['categories', 'categories', 'grid', 'Catégories'], ['favorites', 'favorites', 'heart', 'Favoris'], ['messages', 'messages', 'msg', 'Messages'],
+  ['notifications', 'notifications', 'bell', 'Notifications'], ['profile', 'profile', 'user', 'Profil'], ['settings', 'settings', 'settings', 'Paramètres']
+];
+function navMenu(mode) {
+  const u = Auth.current(), act = currentRoute.active;
+  const badge = k => { const n = k === 'messages' ? Messages.unread() : k === 'notifications' ? Notifs.unread() : k === 'favorites' ? Favs.list().length : 0; return n ? `<span class="ml-auto text-[10px] font-bold min-w-5 h-5 px-1.5 rounded-full grid place-items-center ${k === 'favorites' ? 'bg-white/10' : 'bg-[var(--blue)]'}">${n}</span>` : ''; };
+  return `<div class="flex items-center justify-between mb-7">${logo()}${mode === 'drawer' ? `<button class="icon-btn" data-action="close-drawer">${ic('x')}</button>` : ''}</div>
+    ${u ? `<a href="#/profile" class="card p-3 flex items-center gap-3 mb-5">${avatar(u, 'w-11 h-11')}<div class="min-w-0"><p class="font-semibold text-sm truncate">${esc(u.name)}</p><p class="text-xs text-muted truncate">${esc(u.email)}</p></div></a>`
+         : `<div class="card p-4 mb-5"><p class="text-sm font-medium">Rejoignez DREAMSELL</p><p class="text-xs text-muted mt-0.5 mb-3">Publiez et sauvegardez des projets.</p><div class="flex gap-2"><a href="#/login" class="btn btn-primary text-xs px-3 py-2 flex-1">Connexion</a><a href="#/register" class="btn btn-ghost text-xs px-3 py-2 flex-1">Inscription</a></div></div>`}
+    <a href="#/publish" class="btn btn-primary w-full py-3 mb-5 text-sm">${ic('plus', 'w-4 h-4')} Publier un projet</a>
+    <nav class="flex flex-col gap-1">${NAV.map(([k, path, icon, label]) => `<a href="#/${path}" class="side-link ${act === k ? 'active' : ''}">${ic(icon)}<span>${label}</span>${badge(k)}</a>`).join('')}</nav>
+    ${u ? `<button data-action="logout" class="side-link w-full mt-4 text-red-300/80 hover:text-red-300">${ic('logout')}<span>Déconnexion</span></button>` : ''}
+    <p class="text-[11px] text-muted mt-6 leading-relaxed">© ${new Date().getFullYear()} DREAMSELL · Version de démonstration</p>`;
+}
+function renderChrome() {
+  const act = currentRoute.active, m = Messages.unread();
+  const item = (k, path, icon, label, badge = 0) => `<a href="#/${path}" class="nav-item ${act === k ? 'active' : ''}">${ic(icon, 'w-6 h-6')}<span class="text-[11px] font-medium">${label}</span>${badge ? `<span class="absolute top-2 left-1/2 ml-2 min-w-4 h-4 px-1 rounded-full bg-[var(--blue)] text-white text-[9px] font-bold grid place-items-center">${badge}</span>` : ''}</a>`;
+  $('#bottomNav').innerHTML = `<div class="relative bg-[#070b14]/95 backdrop-blur-xl border-t border-[var(--line)] rounded-t-[26px] shadow-[0_-10px_40px_rgba(0,0,0,.5)] safe-b">
+    <div class="grid grid-cols-5 h-[72px] max-w-3xl mx-auto">
+      ${item('home', '', 'home', 'Accueil')}${item('explore', 'explore', 'compass', 'Explorer')}
+      <div class="flex flex-col items-center justify-end pb-2.5 relative">
+        <a href="#/publish" aria-label="Publier" class="absolute -top-7 w-[62px] h-[62px] rounded-full grid place-items-center btn-primary ring-[6px] ring-[#05070c] shadow-[0_0_30px_rgba(30,143,255,.75)] transition hover:scale-105 active:scale-95">${ic('plus', 'w-7 h-7')}</a>
+        <span class="text-[11px] font-medium ${act === 'publish' ? 'text-blue' : 'text-[#6f7b90]'}">Publier</span>
+      </div>
+      ${item('messages', 'messages', 'msg', 'Messages', m)}${item('profile', 'profile', 'user', 'Profil')}
+    </div></div>`;
+  $('#sidebar').innerHTML = navMenu('side');
+  $('#bottomNav').style.display = currentRoute.hideNav ? 'none' : '';
+}
+
+/* ---------- 6. VUES ---------- */
+/* ===== ACCUEIL ===== */
+function viewHome() {
+  const pop = Projects.popular();
+  return { active:'home', html:wrap(`
+    ${homeHeader()}
+    <div class="flex gap-3 items-center">
+      <form data-search class="flex-1 relative">
+        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-muted pointer-events-none">${ic('search')}</span>
+        <input name="q" autocomplete="off" class="input" style="padding:.95rem 1rem .95rem 3rem;border-radius:18px;background:#0b101b" placeholder="Rechercher un projet, une catégorie...">
+      </form>
+      <button class="icon-btn" style="width:54px;height:54px;border-radius:18px" data-action="filters" aria-label="Filtres">${ic('sliders')}</button>
+    </div>
+
+    <section class="relative mt-5 rounded-[26px] overflow-hidden border border-[rgba(30,143,255,.22)] hero-bg p-5 md:p-10 shadow-[0_20px_60px_-25px_rgba(30,143,255,.55)]">
+      <div class="absolute inset-0 opacity-[.07]" style="background-image:radial-gradient(#fff 1px,transparent 1px);background-size:22px 22px"></div>
+      <div class="relative z-10 max-w-[82%] sm:max-w-[64%] md:max-w-[56%]">
+        <span class="inline-flex items-center gap-1.5 text-[11px] md:text-xs font-medium px-3 py-1.5 rounded-full bg-[rgba(30,143,255,.12)] border border-[rgba(30,143,255,.35)] text-[#8fcbff] backdrop-blur">Bienvenue sur Dreamsell 👋</span>
+        <h2 class="mt-4 text-[20px] leading-[1.28] sm:text-3xl md:text-[44px] md:leading-[1.15] font-bold tracking-tight" style="text-shadow:0 2px 18px rgba(5,7,12,.85)">Achetez, Vendez<br>et Investissez dans des<br><span class="text-blue" style="text-shadow:0 0 24px rgba(30,143,255,.6)">projets</span> innovants</h2>
+        <p class="mt-3 max-w-[72%] sm:max-w-none text-[12.5px] md:text-base text-muted leading-relaxed">La plateforme qui transforme les idées en opportunités.</p>
+      </div>
+      <div class="relative z-10 mt-5 flex flex-wrap gap-2.5">
+        <button class="btn btn-primary px-4 md:px-6 py-3 md:py-3.5 text-[13px] md:text-sm" data-go="explore">Explorer les projets ${ic('arrowR', 'w-4 h-4')}</button>
+        <button class="btn btn-ghost px-4 md:px-6 py-3 md:py-3.5 text-[13px] md:text-sm backdrop-blur" data-go="publish">Publier un projet ${ic('plus', 'w-4 h-4')}</button>
+      </div>
+      <div class="absolute -right-10 sm:-right-4 md:right-4 top-6 sm:top-2 md:top-1/2 md:-translate-y-1/2 w-[50%] sm:w-[44%] md:w-[40%] max-w-[400px] aspect-[240/260] pointer-events-none z-0">${rocketSVG()}</div>
+    </section>
+
+    ${secHead('Explorer par catégorie', 'categories')}
+    <div class="flex gap-3 overflow-x-auto no-scrollbar -mx-4 px-4 pb-1 md:mx-0 md:px-0 md:grid md:grid-cols-6">${CATEGORIES.slice(0, 6).map(c => catCard(c)).join('')}</div>
+
+    ${secHead('Projets populaires', 'explore?sort=popular')}
+    <div class="flex gap-4 overflow-x-auto no-scrollbar -mx-4 px-4 pb-2 md:mx-0 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-3">${pop.map(p => projectCard(p, 'w-[258px] shrink-0 md:w-auto')).join('')}</div>
+
+    <p class="text-[11px] text-muted/70 text-center mt-8 flex items-center justify-center gap-1.5">${ic('info', 'w-3.5 h-3.5')} Projets et chiffres affichés à titre de démonstration.</p>
+  `) };
+}
+
+/* ===== EXPLORER & RECHERCHE ===== */
+function viewListing(mode, q) {
+  const isSearch = mode === 'search';
+  const sorts = [['popular', 'Populaires'], ['recent', 'Plus récents'], ['priceAsc', 'Prix croissant'], ['priceDesc', 'Prix décroissant']];
+  const fcount = ['min', 'max', 'offer', 'loc', 'stage'].filter(k => q[k]).length;
+  const html = wrap(`
+    ${pageHeader(isSearch ? 'Recherche' : 'Explorer les projets', { back:isSearch, right:bellBtn() })}
+    <div class="flex gap-3 items-center">
+      <div class="flex-1 relative">
+        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-muted pointer-events-none">${ic('search')}</span>
+        <input id="lq" value="${esc(q.q || '')}" autocomplete="off" class="input" style="padding:.95rem 2.8rem .95rem 3rem;border-radius:18px;background:#0b101b" placeholder="Rechercher un projet, une catégorie...">
+        <button id="lqClear" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted hover:text-white ${q.q ? '' : 'hidden'}">${ic('x', 'w-4 h-4')}</button>
+      </div>
+      <button class="icon-btn" style="width:54px;height:54px;border-radius:18px" data-action="filters" aria-label="Filtres">${ic('sliders')}${fcount ? `<span class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-[var(--blue)] text-[10px] font-bold grid place-items-center">${fcount}</span>` : ''}</button>
+    </div>
+    <div class="flex gap-2 overflow-x-auto no-scrollbar mt-4 -mx-4 px-4 md:mx-0 md:px-0" id="lcats">
+      <button class="pill ${!q.cat ? 'on' : ''}" data-cat="">Tous</button>
+      ${CATEGORIES.map(c => `<button class="pill ${q.cat === c.id ? 'on' : ''}" data-cat="${c.id}">${c.name}</button>`).join('')}
+    </div>
+    <div id="lchips" class="flex flex-wrap gap-2 mt-3"></div>
+    <div id="lextra"></div>
+    <div class="flex items-center justify-between mt-5 mb-3 gap-3">
+      <p id="lcount" class="text-sm text-muted"></p>
+      <select id="lsort" class="input" style="width:auto;padding:.5rem 2.4rem .5rem .9rem;font-size:.8rem;border-radius:12px">${sorts.map(([v, l]) => `<option value="${v}" ${(q.sort || 'popular') === v ? 'selected' : ''}>${l}</option>`).join('')}</select>
+    </div>
+    <div id="lresults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>`);
+
+  const after = () => {
+    const st = { ...q };
+    const labels = { min:v => 'Min ' + fmt(v), max:v => 'Max ' + fmt(v), offer:v => v, loc:v => v, stage:v => v };
+    const update = () => {
+      const list = Projects.search(st);
+      const qs = new URLSearchParams(Object.entries(st).filter(([, v]) => v)).toString();
+      history.replaceState(null, '', '#/' + mode + (qs ? '?' + qs : ''));
+      $('#lcount').innerHTML = `<span class="text-white font-semibold">${list.length}</span> projet${list.length > 1 ? 's' : ''} trouvé${list.length > 1 ? 's' : ''}`;
+      $('#lqClear').classList.toggle('hidden', !st.q);
+      $('#lchips').innerHTML = Object.keys(labels).filter(k => st[k]).map(k => `<button class="chip" data-rm="${k}">${esc(labels[k](st[k]))} ${ic('x', 'w-3 h-3')}</button>`).join('');
+      const showExtra = isSearch && !st.q;
+      const recent = Store.get('recent', []);
+      $('#lextra').innerHTML = showExtra ? `
+        ${recent.length ? `<div class="mt-5"><div class="flex justify-between items-center mb-2.5"><p class="text-sm font-semibold">Recherches récentes</p><button id="clrRecent" class="text-xs text-blue">Effacer</button></div><div class="flex flex-wrap gap-2">${recent.map(r => `<button class="pill" data-sugg="${esc(r)}">${ic('clock', 'w-3.5 h-3.5 inline -mt-0.5 mr-1')}${esc(r)}</button>`).join('')}</div></div>` : ''}
+        <div class="mt-5"><p class="text-sm font-semibold mb-2.5">Suggestions</p><div class="flex flex-wrap gap-2">${['robot', 'irrigation', 'mode éthique', 'immobilier', 'studio', 'Abidjan', 'InnovTech'].map(s => `<button class="pill" data-sugg="${s}">${ic('trend', 'w-3.5 h-3.5 inline -mt-0.5 mr-1 text-blue')}${s}</button>`).join('')}</div></div>` : '';
+      $('#lresults').innerHTML = list.length ? list.map(p => projectCard(p, 'w-full')).join('')
+        : `<div class="col-span-full">${emptyState('search', 'Aucun projet trouvé', 'Essayez d’autres mots-clés ou modifiez vos filtres.', `<button id="lreset" class="btn btn-ghost px-5 py-2.5 mt-5 text-sm">Réinitialiser la recherche</button>`)}</div>`;
+    };
+    const saveRecent = v => { if (!v) return; const r = Store.get('recent', []).filter(x => x !== v); r.unshift(v); Store.set('recent', r.slice(0, 6)); };
+    const inp = $('#lq');
+    inp.addEventListener('input', debounce(() => { st.q = inp.value.trim(); update(); }, 200));
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { saveRecent(inp.value.trim()); inp.blur(); } });
+    $('#lqClear').onclick = () => { inp.value = ''; st.q = ''; update(); inp.focus(); };
+    $('#lsort').onchange = e => { st.sort = e.target.value; update(); };
+    $('#lcats').onclick = e => { const b = e.target.closest('[data-cat]'); if (!b) return; st.cat = b.dataset.cat; $$('#lcats .pill').forEach(x => x.classList.toggle('on', x === b)); update(); };
+    $('#view').firstElementChild.addEventListener('click', e => {
+      const rm = e.target.closest('[data-rm]'); if (rm) { delete st[rm.dataset.rm]; update(); return; }
+      const sg = e.target.closest('[data-sugg]'); if (sg) { inp.value = sg.dataset.sugg; st.q = sg.dataset.sugg; saveRecent(st.q); update(); return; }
+      if (e.target.closest('#clrRecent')) { Store.set('recent', []); update(); return; }
+      if (e.target.closest('#lreset')) { Object.keys(st).forEach(k => delete st[k]); inp.value = ''; $$('#lcats .pill').forEach((x, i) => x.classList.toggle('on', i === 0)); update(); }
+    });
+    update();
+    if (isSearch && !q.q) setTimeout(() => inp.focus(), 50);
+  };
+  return { active:isSearch ? 'search' : 'explore', html, after };
+}
+
+function openFilters(q = {}) {
+  const path = parseHash().path, target = path === 'search' ? 'search' : 'explore';
+  const locs = Projects.locations();
+  const group = (name, opts) => `<div class="flex flex-wrap gap-2" data-group="${name}">${['', ...opts].map(o => `<button type="button" class="pill ${(q[name] || '') === o ? 'on' : ''}" data-val="${o}">${o || 'Tous'}</button>`).join('')}</div>`;
+  openSheet(`
+    <div class="flex items-center justify-between mb-5"><h3 class="text-lg font-semibold">Filtres</h3><button class="icon-btn" data-action="close-sheet">${ic('x')}</button></div>
+    <form id="ff" class="space-y-5">
+      <div><label class="label">Catégorie</label><select name="cat" class="input"><option value="">Toutes les catégories</option>${CATEGORIES.map(c => `<option value="${c.id}" ${q.cat === c.id ? 'selected' : ''}>${c.name}</option>`).join('')}</select></div>
+      <div><label class="label">Prix du projet (FCFA)</label>
+        <div class="grid grid-cols-2 gap-3"><input name="min" type="number" min="0" step="50000" placeholder="Minimum" class="input" value="${esc(q.min || '')}"><input name="max" type="number" min="0" step="50000" placeholder="Maximum" class="input" value="${esc(q.max || '')}"></div>
+        <div class="flex flex-wrap gap-2 mt-2.5">${[['', '1000000', '< 1 M'], ['1000000', '5000000', '1 M – 5 M'], ['5000000', '20000000', '5 M – 20 M'], ['20000000', '', '> 20 M']].map(([a, b, l]) => `<button type="button" class="pill text-xs" data-range="${a}|${b}">${l}</button>`).join('')}</div></div>
+      <div><label class="label">Type d’offre</label>${group('offer', OFFER_TYPES)}</div>
+      <div><label class="label">Localisation</label><select name="loc" class="input"><option value="">Toutes les villes</option>${locs.map(l => `<option ${q.loc === l ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></div>
+      <div><label class="label">Étape du projet</label>${group('stage', STAGES)}</div>
+      <div class="grid grid-cols-2 gap-3 pt-2"><button type="button" id="ffReset" class="btn btn-ghost py-3.5 text-sm">Réinitialiser</button><button class="btn btn-primary py-3.5 text-sm">Afficher <span id="ffCount"></span></button></div>
+    </form>`, panel => {
+    const f = $('#ff', panel), groups = { offer:q.offer || '', stage:q.stage || '' };
+    const collect = () => { const d = Object.fromEntries(new FormData(f)); return { q:q.q || '', sort:q.sort || '', ...d, ...groups }; };
+    const count = () => { const n = Projects.search(collect()).length; $('#ffCount', panel).textContent = `(${n})`; };
+    f.addEventListener('input', count);
+    f.addEventListener('click', e => {
+      const b = e.target.closest('[data-val]');
+      if (b) { const g = b.parentElement.dataset.group; groups[g] = b.dataset.val; $$('.pill', b.parentElement).forEach(x => x.classList.toggle('on', x === b)); count(); }
+      const r = e.target.closest('[data-range]');
+      if (r) { const [a, bb] = r.dataset.range.split('|'); f.min.value = a; f.max.value = bb; count(); }
+    });
+    $('#ffReset', panel).onclick = () => { f.reset(); f.cat.value = ''; f.loc.value = ''; f.min.value = ''; f.max.value = ''; groups.offer = groups.stage = ''; $$('[data-group]', f).forEach(g => $$('.pill', g).forEach((x, i) => x.classList.toggle('on', i === 0))); count(); };
+    f.onsubmit = e => { e.preventDefault(); const qs = new URLSearchParams(Object.entries(collect()).filter(([, v]) => v)).toString(); closeSheet(); location.hash = '#/' + target + (qs ? '?' + qs : ''); render(); };
+    count();
+  });
+}
+
+/* ===== CATÉGORIES ===== */
+function viewCategories() {
+  const all = Projects.all();
+  return { active:'categories', html:wrap(`
+    ${pageHeader('Catégories', { right:bellBtn() })}
+    <p class="text-sm text-muted -mt-1 mb-5">Parcourez les projets par secteur d’activité.</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5">
+      ${CATEGORIES.map(c => { const n = all.filter(p => p.category === c.id).length; return `
+        <button data-go="explore?cat=${c.id}" class="card p-4 text-left relative overflow-hidden group hover:-translate-y-0.5 transition" style="border-color:${c.color}26">
+          <div class="absolute -right-8 -top-8 w-28 h-28 rounded-full opacity-40 blur-2xl transition group-hover:opacity-70" style="background:${c.color}"></div>
+          <span class="relative w-12 h-12 rounded-2xl grid place-items-center mb-6" style="background:${c.color}1f;color:${c.color};border:1px solid ${c.color}44">${ic(c.icon, 'w-6 h-6')}</span>
+          <p class="relative font-semibold">${c.name}</p>
+          <p class="relative text-xs text-muted mt-0.5 flex items-center justify-between">${n} projet${n > 1 ? 's' : ''} <span style="color:${c.color}">${ic('arrowR', 'w-4 h-4')}</span></p>
+        </button>`; }).join('')}
+    </div>`) };
+}
+
+/* ===== DÉTAIL D'UN PROJET ===== */
+function viewProject({ id }) {
+  const p = Projects.get(id);
+  if (!p) return { active:'explore', html:wrap(pageHeader('Projet') + emptyState('search', 'Projet introuvable', 'Ce projet n’existe plus ou a été retiré.', `<a href="#/explore" class="btn btn-primary px-5 py-3 mt-5 text-sm">Explorer les projets</a>`)) };
+  Projects.view(id);
+  const c = cat(p.category);
+  const cr = Users.get(p.creatorId) || { id:p.creatorId, name:p.creatorName, role:'Entrepreneur', rating:0, reviews:0 };
+  const imgs = p.images.length ? p.images : ['data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10"><rect width="16" height="10" fill="#0d1422"/></svg>')];
+  const extra = imgs.length - 4;
+  const stats = [['trend', 'ROI estimé', p.roi || '—'], ['clock', 'Durée estimée', p.duration || '—'], ['layers', 'Étape actuelle', p.stage], ['users', 'Investisseurs', p.investors ?? 0]];
+  const checkList = (title, items) => `<div class="card p-4"><p class="text-[11px] font-semibold tracking-wider text-blue uppercase mb-3">${title}</p><ul class="space-y-2.5">${(items || []).map(a => `<li class="flex gap-2 text-[12.5px] md:text-sm text-slate-200 leading-snug"><span class="w-[18px] h-[18px] rounded-full bg-[rgba(30,143,255,.16)] text-blue grid place-items-center shrink-0 mt-px">${ic('check', 'w-3 h-3')}</span>${esc(a)}</li>`).join('') || '<li class="text-xs text-muted">Non renseigné</li>'}</ul></div>`;
+  const ctas = (cls) => `<button id="${cls}Invest" class="btn btn-primary py-3.5 text-[13.5px] md:text-sm">${ic('trend', 'w-4 h-4')} Investir dans ce projet</button><button id="${cls}Contact" class="btn btn-ghost py-3.5 text-[13.5px] md:text-sm">${ic('msg', 'w-4 h-4')} Contacter le créateur</button>`;
+
+  const html = wrap(`
+    ${pageHeader('', { center:`<div class="flex-1 flex justify-center">${logo('text-[17px]', 'w-7 h-7')}</div>`, right:`<button id="pShare" class="icon-btn" aria-label="Partager">${ic('share')}</button><button data-fav="${p.id}" class="fav-btn icon-btn ${Favs.has(p.id) ? 'is-fav' : ''}" aria-label="Favori">${ic('heart')}</button>` })}
+    <div class="grid lg:grid-cols-[1.45fr_1fr] lg:grid-rows-[auto_1fr] gap-x-8 lg:items-start">
+      <div class="lg:col-start-1 lg:row-start-1">
+        <div class="grid grid-cols-[1fr_74px] md:grid-cols-[1fr_104px] gap-2.5">
+          <div id="gMainWrap" class="relative rounded-[22px] overflow-hidden aspect-[4/3.3] md:aspect-[16/10.5] bg-[#0d1422] border border-[var(--line)] select-none">
+            <img id="gMain" src="${imgs[0]}" alt="${esc(p.title)}" class="w-full h-full object-cover transition-opacity duration-200">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+            ${imgs.length > 1 ? `<button id="gPrev" class="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/45 backdrop-blur grid place-items-center">${ic('chevL', 'w-4 h-4')}</button><button id="gNext" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/45 backdrop-blur grid place-items-center">${ic('chevR', 'w-4 h-4')}</button>` : ''}
+            <span class="absolute top-3 left-3 text-[11px] font-medium px-2.5 py-1 rounded-full backdrop-blur-md flex items-center gap-1" style="background:${c.color}33;border:1px solid ${c.color}77">${ic(c.icon, 'w-3.5 h-3.5')}${c.name}</span>
+            <span id="gCount" class="absolute bottom-3 right-3 text-xs font-semibold px-3 py-1 rounded-full bg-black/60 backdrop-blur border border-white/10">1/${imgs.length}</span>
+          </div>
+          <div class="flex flex-col gap-2.5">
+            ${imgs.slice(0, 4).map((src, i) => `<button data-thumb="${i}" class="thumb relative flex-1 min-h-0 rounded-2xl overflow-hidden border-2 ${i === 0 ? 'border-[var(--blue)] shadow-[0_0_16px_rgba(30,143,255,.6)]' : 'border-transparent opacity-70'} transition"><img src="${src}" alt="" class="w-full h-full object-cover">${i === 3 && extra > 0 ? `<span class="absolute inset-0 bg-black/60 grid place-items-center text-sm font-semibold">+${extra}</span>` : ''}</button>`).join('')}
+            ${imgs.length < 4 ? Array(4 - imgs.length).fill('<div class="flex-1 rounded-2xl bg-[#0b101b] border border-[var(--line)]"></div>').join('') : ''}
+          </div>
+        </div>
+        <div class="mt-5">
+          <div class="flex items-start justify-between gap-3">
+            <h1 class="text-[21px] md:text-3xl font-bold leading-tight">${esc(p.title)}</h1>
+            ${p.verified ? `<span class="shrink-0 mt-1 inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[rgba(30,143,255,.14)] text-[#7cc0ff] border border-[rgba(30,143,255,.4)] shadow-[0_0_14px_-4px_rgba(30,143,255,.8)]">${ic('verified', 'w-3.5 h-3.5')} Projet vérifié</span>` : `<span class="shrink-0 mt-1 text-[11px] px-2.5 py-1 rounded-full bg-white/5 text-muted border border-[var(--line)]">En vérification</span>`}
+          </div>
+          <p class="text-sm md:text-base text-muted mt-1.5">${esc(p.subtitle || '')}</p>
+          <div class="flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs text-muted"><span class="flex items-center gap-1">${ic('pin', 'w-3.5 h-3.5')}${esc(p.location)}</span><span class="flex items-center gap-1">${ic('tag', 'w-3.5 h-3.5')}${p.offerType}</span><span class="flex items-center gap-1">${ic('eye', 'w-3.5 h-3.5')}${fmtNum(p.views)} vues</span></div>
+        </div>
+      </div>
+
+      <div class="lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:sticky lg:top-5 space-y-3.5 mt-5 lg:mt-0">
+        <div class="card grid grid-cols-2 divide-x divide-[var(--line)] glow">
+          <div class="p-4"><p class="text-[11px] text-muted">Prix du projet</p><p class="text-blue font-bold text-[17px] md:text-xl mt-1 leading-tight">${fmt(p.price)}</p></div>
+          <div class="p-4"><p class="text-[11px] text-muted">Investissement minimum</p><p class="font-bold text-[17px] md:text-xl mt-1 leading-tight">${fmt(p.minInvest)}</p></div>
+        </div>
+        <div class="grid grid-cols-4 gap-2">
+          ${stats.map(([icn, l, v]) => `<div class="card px-1.5 py-3 text-center flex flex-col items-center"><span class="w-8 h-8 rounded-xl bg-[rgba(30,143,255,.13)] text-blue grid place-items-center mb-1.5">${ic(icn, 'w-4 h-4')}</span><p class="text-[9.5px] md:text-[10.5px] text-muted leading-tight">${l}</p><p class="text-[12px] md:text-[13px] font-semibold mt-0.5 leading-tight">${esc(v)}</p></div>`).join('')}
+        </div>
+        <p class="text-[10.5px] text-muted/80 flex gap-1.5 leading-snug">${ic('info', 'w-3.5 h-3.5 shrink-0 mt-px')}Chiffres indicatifs fournis par le créateur à titre de démonstration. Ils ne constituent en aucun cas une garantie de rendement. Tout investissement comporte un risque de perte.</p>
+        <div class="card p-4 flex items-center gap-3">
+          <span class="rounded-full p-[2px] bg-gradient-to-br from-[#40c4ff] to-[#1e6fff]">${avatar(cr, 'w-12 h-12')}</span>
+          <div class="flex-1 min-w-0">
+            <p class="font-semibold truncate">${esc(cr.name)}</p>
+            <p class="text-xs text-muted flex items-center gap-1">${esc(cr.role || 'Entrepreneur')} <span class="text-blue">${ic('verified', 'w-3.5 h-3.5')}</span></p>
+            <p class="text-xs mt-0.5 flex items-center gap-1"><span class="font-semibold">${cr.rating ? cr.rating.toFixed(1) : 'Nouveau'}</span>${cr.rating ? `<span class="text-amber-400">${ic('star', 'w-3.5 h-3.5', true)}</span><span class="text-muted">(${cr.reviews} avis)</span>` : ''}</p>
+          </div>
+          <a href="#/creator/${cr.id}" class="btn btn-ghost text-xs px-3.5 py-2.5">Voir le profil</a>
+        </div>
+        <div class="hidden lg:grid grid-cols-1 gap-2.5 pt-1">${ctas('d')}</div>
+      </div>
+
+      <div class="lg:col-start-1 lg:row-start-2 mt-6">
+        <h2 class="text-[17px] font-semibold mb-2">À propos du projet</h2>
+        <p id="pDesc" class="text-sm text-slate-300/90 leading-relaxed line-clamp-3 whitespace-pre-line">${esc(p.description)}</p>
+        <button id="pMore" class="text-sm font-medium text-blue mt-1.5">Voir plus</button>
+        <div class="grid grid-cols-2 gap-3 mt-5">${checkList('Avantages', p.advantages)}${checkList('Ce que vous obtenez', p.benefits)}</div>
+        <p class="text-[10.5px] text-muted/70 mt-2">Informations de démonstration fournies par le créateur.</p>
+        ${p.docs?.length ? `<h2 class="text-[17px] font-semibold mt-6 mb-3">Documents</h2><div class="space-y-2">${p.docs.map(d => `<button data-doc class="card w-full p-3.5 flex items-center gap-3 text-left hover:border-[rgba(30,143,255,.4)]"><span class="w-10 h-10 rounded-xl bg-[rgba(30,143,255,.12)] text-blue grid place-items-center">${ic('file')}</span><span class="flex-1 min-w-0"><span class="block text-sm font-medium truncate">${esc(d.name)}</span><span class="text-xs text-muted">${esc(d.size || '')}</span></span>${ic('lock', 'w-4 h-4 text-muted')}</button>`).join('')}</div>` : ''}
+        <div class="h-28 lg:hidden"></div>
+      </div>
+    </div>
+    <div class="lg:hidden fixed bottom-0 inset-x-0 z-30 bg-[#05070c]/92 backdrop-blur-xl border-t border-[var(--line)] px-4 pt-3 pb-4 safe-b">
+      <div class="max-w-md md:max-w-3xl mx-auto grid grid-cols-[1.2fr_1fr] gap-2.5">${ctas('m')}</div>
+    </div>`);
+
+  const after = () => {
+    let idx = 0;
+    const show = i => {
+      idx = (i + imgs.length) % imgs.length; const m = $('#gMain');
+      m.style.opacity = .3; setTimeout(() => { m.src = imgs[idx]; m.style.opacity = 1; }, 120);
+      $('#gCount').textContent = `${idx + 1}/${imgs.length}`;
+      $$('.thumb').forEach(t => { const on = +t.dataset.thumb === idx || (+t.dataset.thumb === 3 && idx > 3); t.classList.toggle('border-[var(--blue)]', on); t.classList.toggle('shadow-[0_0_16px_rgba(30,143,255,.6)]', on); t.classList.toggle('border-transparent', !on); t.classList.toggle('opacity-70', !on); });
+    };
+    $$('.thumb').forEach(t => t.onclick = () => show(+t.dataset.thumb));
+    $('#gPrev') && ($('#gPrev').onclick = () => show(idx - 1));
+    $('#gNext') && ($('#gNext').onclick = () => show(idx + 1));
+    let sx = 0; const w = $('#gMainWrap');
+    w.addEventListener('touchstart', e => sx = e.touches[0].clientX, { passive:true });
+    w.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) show(idx + (dx < 0 ? 1 : -1)); });
+    $('#pMore').onclick = () => { const d = $('#pDesc'), open = d.classList.toggle('line-clamp-3'); $('#pMore').textContent = open ? 'Voir plus' : 'Voir moins'; };
+    if ($('#pDesc').scrollHeight <= $('#pDesc').clientHeight + 2) $('#pMore').style.display = 'none';
+    $('#pShare').onclick = async () => {
+      const url = location.href;
+      try { if (navigator.share) await navigator.share({ title:p.title, text:p.subtitle, url }); else { await navigator.clipboard.writeText(url); toast('Lien copié dans le presse-papiers 🔗'); } } catch {}
+    };
+    $$('[data-doc]').forEach(b => b.onclick = () => toast('Documents accessibles après mise en relation avec le créateur.', 'info'));
+    ['m', 'd'].forEach(k => { $('#' + k + 'Invest').onclick = () => openInvest(p); $('#' + k + 'Contact').onclick = () => contactCreator(p); });
+  };
+  return { active:'explore', hideNav:true, html, after };
+}
+
+function requireAuth(msg) {
+  if (Auth.current()) return true;
+  sessionStorage.setItem('ds_redirect', location.hash); toast(msg, 'info'); go('login'); return false;
+}
+function contactCreator(p) {
+  if (!requireAuth('Connectez-vous pour contacter le créateur.')) return;
+  if (p.creatorId === Auth.current().id) return toast('C’est votre propre projet.', 'error');
+  const c = Messages.start(p.id); go('messages/' + c.id);
+}
+function openInvest(p) {
+  if (!requireAuth('Connectez-vous pour investir dans ce projet.')) return;
+  if (p.creatorId === Auth.current().id) return toast('Vous ne pouvez pas investir dans votre propre projet.', 'error');
+  const min = p.minInvest || 0;
+  openSheet(`
+    <div class="flex items-center justify-between mb-4"><h3 class="text-lg font-semibold">Investir dans ce projet</h3><button class="icon-btn" data-action="close-sheet">${ic('x')}</button></div>
+    <div class="card p-3 flex items-center gap-3 mb-4"><img src="${p.images[0] || ''}" class="w-14 h-14 rounded-xl object-cover" alt=""><div class="min-w-0"><p class="font-semibold text-sm truncate">${esc(p.title)}</p><p class="text-xs text-muted">Minimum : <span class="text-blue font-semibold">${fmt(min)}</span></p></div></div>
+    <div class="rounded-2xl p-3.5 mb-4 bg-[rgba(30,143,255,.08)] border border-[rgba(30,143,255,.3)] text-xs text-[#a9d4ff] flex gap-2 leading-relaxed">${ic('info', 'w-4 h-4 shrink-0')}<span><b>Version de démonstration :</b> aucune transaction ni paiement réel n’est effectué. Votre intention d’investissement est transmise au créateur par message afin d’ouvrir la discussion.</span></div>
+    <form id="invF" class="space-y-4">
+      <div><label class="label">Montant envisagé (FCFA)</label><input name="amount" type="number" min="${min}" step="50000" value="${min}" class="input text-lg font-semibold" required>
+        <div class="flex gap-2 mt-2.5">${[1, 2, 5].map(m => `<button type="button" class="pill text-xs" data-amt="${min * m}">${fmt(min * m)}</button>`).join('')}</div></div>
+      <div><label class="label">Message au créateur (optionnel)</label><textarea name="msg" class="input" style="min-height:80px" placeholder="Présentez-vous et vos attentes…"></textarea></div>
+      <label class="flex gap-2.5 text-xs text-muted items-start cursor-pointer"><input type="checkbox" name="risk" required class="mt-0.5 accent-[#1e8fff]">Je comprends que les rendements affichés sont indicatifs et que tout investissement comporte des risques.</label>
+      <button class="btn btn-primary w-full py-3.5">Envoyer ma demande d’investissement</button>
+    </form>`, panel => {
+    const f = $('#invF', panel);
+    $$('[data-amt]', panel).forEach(b => b.onclick = () => f.amount.value = b.dataset.amt);
+    f.onsubmit = e => {
+      e.preventDefault(); const amt = +f.amount.value;
+      if (amt < min) return toast(`Le montant minimum est de ${fmt(min)}.`, 'error');
+      const c = Messages.start(p.id);
+      Messages.send(c.id, `💼 Demande d’investissement : ${fmt(amt)} dans « ${p.title} ».${f.msg.value.trim() ? '\n\n' + f.msg.value.trim() : ''}`);
+      closeSheet(); toast('Demande envoyée au créateur ✅'); go('messages/' + c.id);
+    };
+  });
+}
+
+
+/* ===== OUTILS FORMULAIRES ===== */
+function compressImage(file, max = 1000, q = .72) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => { const img = new Image(); img.onload = () => { const s = Math.min(1, max / Math.max(img.width, img.height)); const cv = document.createElement('canvas'); cv.width = Math.round(img.width * s); cv.height = Math.round(img.height * s); cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height); res(cv.toDataURL('image/jpeg', q)); }; img.onerror = rej; img.src = r.result; };
+    r.onerror = rej; r.readAsDataURL(file);
+  });
+}
+function field(label, name, { type = 'text', ph = '', icon = '', value = '', req = false, extra = '' } = {}) {
+  const pwd = type === 'password';
+  return `<div><label class="label" for="f-${name}">${label}${req ? ' <span class="text-blue">*</span>' : ''}</label><div class="relative">
+    ${icon ? `<span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted pointer-events-none">${ic(icon, 'w-[18px] h-[18px]')}</span>` : ''}
+    <input id="f-${name}" name="${name}" type="${type}" value="${esc(value)}" placeholder="${ph}" ${req ? 'required' : ''} ${extra} class="input" style="${icon ? 'padding-left:2.75rem;' : ''}${pwd ? 'padding-right:2.75rem;' : ''}">
+    ${pwd ? `<button type="button" data-eye class="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-white">${ic('eye', 'w-4 h-4')}</button>` : ''}</div></div>`;
+}
+function bindEyes(root = document) {
+  $$('[data-eye]', root).forEach(b => b.onclick = () => { const i = b.previousElementSibling; i.type = i.type === 'password' ? 'text' : 'password'; b.innerHTML = ic(i.type === 'password' ? 'eye' : 'eyeOff', 'w-4 h-4'); });
+}
+function busy(btn, on, label) { if (on) { btn.dataset.l = btn.innerHTML; btn.disabled = true; btn.innerHTML = `<span class="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></span> ${label || 'Patientez…'}`; } else { btn.disabled = false; btn.innerHTML = btn.dataset.l; } }
+
+/* ===== PUBLIER UN PROJET ===== */
+function viewPublish() {
+  const u = Auth.current();
+  const sec = (n, title, body, cls = '') => `<section class="card p-4 md:p-5 ${cls}"><div class="flex items-center gap-2.5 mb-4"><span class="w-7 h-7 rounded-lg bg-[rgba(30,143,255,.15)] text-blue text-xs font-bold grid place-items-center">${n}</span><h2 class="font-semibold">${title}</h2></div><div class="space-y-4">${body}</div></section>`;
+  const listField = (id, ph) => `<div id="${id}" class="space-y-2"></div><div class="flex gap-2"><input id="${id}In" class="input" placeholder="${ph}"><button type="button" id="${id}Add" class="btn btn-ghost px-4 shrink-0">${ic('plus', 'w-4 h-4')}</button></div>`;
+  const html = wrap(`
+    ${pageHeader('Publier un projet')}
+    <div class="rounded-[22px] p-4 mb-4 hero-bg border border-[rgba(30,143,255,.25)] flex items-center gap-3.5">
+      <span class="w-12 h-12 rounded-2xl bg-[rgba(30,143,255,.14)] grid place-items-center glow shrink-0">${logoMark('w-8 h-8')}</span>
+      <div><p class="font-semibold">Présentez votre projet au monde</p><p class="text-xs text-muted mt-0.5">Chaque projet est examiné par l’équipe DREAMSELL avant d’obtenir le badge « Projet vérifié ».</p></div>
+    </div>
+    <form id="pubF" class="grid gap-4 lg:grid-cols-2" novalidate>
+      ${sec(1, 'Images du projet', `
+        <label id="drop" class="dropzone flex flex-col items-center justify-center text-center p-6 cursor-pointer">
+          <input id="imgIn" type="file" accept="image/*" multiple class="hidden">
+          <span class="w-14 h-14 rounded-2xl bg-[rgba(30,143,255,.15)] text-blue grid place-items-center mb-3 glow">${ic('upload', 'w-7 h-7')}</span>
+          <p class="font-medium text-sm">Glissez vos images ici ou <span class="text-blue">parcourez</span></p>
+          <p class="text-xs text-muted mt-1">JPG, PNG ou WEBP · 8 images max · la 1<sup>re</sup> sera la couverture</p>
+        </label>
+        <div class="flex items-center justify-between text-xs text-muted"><span id="imgCount">0/8 image</span><span>Compression automatique</span></div>
+        <div id="imgGrid" class="grid grid-cols-3 sm:grid-cols-4 gap-2.5"></div>`, 'lg:col-span-2')}
+      ${sec(2, 'Informations générales', `
+        ${field('Nom du projet', 'title', { ph:'ex. Delivia – Robot livreur autonome', req:true, extra:'maxlength="80"' })}
+        ${field('Accroche', 'subtitle', { ph:'ex. Solution de livraison intelligente et écologique', extra:'maxlength="100"' })}
+        <div><label class="label">Catégorie <span class="text-blue">*</span></label><select name="category" class="input" required><option value="">Choisir une catégorie</option>${CATEGORIES.map(c => `<option value="${c.id}">${c.name}</option>`).join('')}</select></div>
+        <div><label class="label">Description <span class="text-blue">*</span></label><textarea name="description" class="input" maxlength="2000" placeholder="Décrivez votre projet, le problème résolu, votre marché, votre équipe…"></textarea><p class="text-[11px] text-muted text-right mt-1"><span id="descN">0</span>/2000 · 30 caractères min.</p></div>
+        ${field('Mots-clés', 'tags', { ph:'ex. robot, logistique, écologie (séparés par des virgules)' })}`)}
+      ${sec(3, 'Offre & chiffres', `
+        <div class="grid grid-cols-2 gap-3">${field('Prix du projet (FCFA)', 'price', { type:'number', ph:'5000000', req:true, extra:'min="0" step="50000"' })}${field('Investissement min. (FCFA)', 'minInvest', { type:'number', ph:'500000', extra:'min="0" step="50000"' })}</div>
+        <div><label class="label">Type d’offre <span class="text-blue">*</span></label><div class="grid grid-cols-3 gap-2" id="offerSeg">${OFFER_TYPES.map((o, i) => `<button type="button" data-offer="${o}" class="pill text-center ${i === 0 ? 'on' : ''}">${o}</button>`).join('')}</div></div>
+        <div class="grid grid-cols-2 gap-3"><div><label class="label">Étape actuelle</label><select name="stage" class="input">${STAGES.map(s => `<option ${s === 'Prototype' ? 'selected' : ''}>${s}</option>`).join('')}</select></div>${field('Localisation', 'location', { ph:'Ville, Pays', req:true, icon:'pin', value:u.location || '' })}</div>
+        <div class="grid grid-cols-2 gap-3">${field('ROI estimé (optionnel)', 'roi', { ph:'ex. 20% / an' })}${field('Durée estimée', 'duration', { ph:'ex. 3 - 5 ans' })}</div>
+        <p class="text-[11px] text-muted flex gap-1.5">${ic('info', 'w-3.5 h-3.5 shrink-0')}Les chiffres financiers sont indicatifs et affichés avec un avertissement : ils ne constituent pas une promesse de rendement.</p>`)}
+      ${sec(4, 'Informations sur le créateur', `
+        <div class="grid grid-cols-2 gap-3">${field('Nom affiché', 'creatorName', { value:u.name, req:true })}<div><label class="label">Statut</label><select name="creatorRole" class="input">${['Entrepreneur', 'Startup', 'Entreprise', 'Association'].map(r => `<option>${r}</option>`).join('')}</select></div></div>
+        ${field('Email de contact', 'contact', { type:'email', value:u.email, icon:'mail' })}
+        <div><label class="label">Présentation courte</label><textarea name="creatorBio" class="input" style="min-height:80px" maxlength="300" placeholder="Votre parcours, votre équipe…">${esc(u.bio || '')}</textarea></div>`)}
+      ${sec(5, 'Avantages', `
+        <div><label class="label">Avantages du projet</label>${listField('adv', 'ex. Zéro émission de CO₂')}</div>
+        <div><label class="label">Ce que les acheteurs / investisseurs obtiennent</label>${listField('ben', 'ex. Part du capital du projet')}</div>`)}
+      ${sec(6, 'Documents éventuels', `
+        <label class="dropzone flex items-center gap-3 p-4 cursor-pointer"><input id="docIn" type="file" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx" class="hidden"><span class="w-11 h-11 rounded-xl bg-[rgba(30,143,255,.15)] text-blue grid place-items-center shrink-0">${ic('file')}</span><span><span class="block text-sm font-medium">Ajouter des documents</span><span class="text-xs text-muted">Business plan, fiche technique… (PDF, Word, Excel, PowerPoint)</span></span></label>
+        <div id="docList" class="space-y-2"></div>
+        <p class="text-[11px] text-muted">En démo, seuls les noms des fichiers sont enregistrés. L’hébergement sécurisé nécessite le backend.</p>`)}
+      <div class="lg:col-span-2 space-y-4">
+        <label class="flex gap-2.5 text-xs text-muted items-start cursor-pointer"><input type="checkbox" name="certify" class="mt-0.5 accent-[#1e8fff]">Je certifie être l’auteur ou le représentant légal de ce projet et que les informations fournies sont exactes.</label>
+        <button id="pubBtn" class="btn btn-primary w-full py-4 text-[15px]">${ic('rocket', 'w-5 h-5')} Publier le projet</button>
+      </div>
+    </form>`);
+
+  const after = () => {
+    const f = $('#pubF'); let imgs = [], docs = [], offer = OFFER_TYPES[0]; const lists = { adv:[], ben:[] };
+    const renderImgs = () => {
+      $('#imgCount').textContent = `${imgs.length}/8 image${imgs.length > 1 ? 's' : ''}`;
+      $('#imgGrid').innerHTML = imgs.map((src, i) => `<div class="relative aspect-square rounded-2xl overflow-hidden border ${i === 0 ? 'border-[var(--blue)] glow' : 'border-[var(--line)]'} fade-in"><img src="${src}" class="w-full h-full object-cover" alt="">${i === 0 ? '<span class="absolute bottom-1.5 left-1.5 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[var(--blue)]">Couverture</span>' : `<button type="button" data-cover="${i}" class="absolute bottom-1.5 left-1.5 text-[10px] px-2 py-0.5 rounded-full bg-black/60 backdrop-blur">Définir</button>`}<button type="button" data-rmimg="${i}" class="absolute top-1.5 right-1.5 w-7 h-7 rounded-full bg-black/60 backdrop-blur grid place-items-center hover:bg-red-500/80">${ic('x', 'w-3.5 h-3.5')}</button></div>`).join('');
+    };
+    const addFiles = async files => {
+      const list = [...files].filter(x => x.type.startsWith('image/'));
+      for (const file of list) { if (imgs.length >= 8) { toast('Maximum 8 images.', 'error'); break; } try { imgs.push(await compressImage(file)); } catch { toast('Image illisible : ' + file.name, 'error'); } }
+      renderImgs();
+    };
+    const drop = $('#drop');
+    $('#imgIn').onchange = e => { addFiles(e.target.files); e.target.value = ''; };
+    ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('drag'); }));
+    ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('drag'); }));
+    drop.addEventListener('drop', e => addFiles(e.dataTransfer.files));
+    $('#imgGrid').onclick = e => {
+      const rm = e.target.closest('[data-rmimg]'); if (rm) { imgs.splice(+rm.dataset.rmimg, 1); renderImgs(); }
+      const cv = e.target.closest('[data-cover]'); if (cv) { const [x] = imgs.splice(+cv.dataset.cover, 1); imgs.unshift(x); renderImgs(); }
+    };
+    $('#offerSeg').onclick = e => { const b = e.target.closest('[data-offer]'); if (!b) return; offer = b.dataset.offer; $$('#offerSeg .pill').forEach(x => x.classList.toggle('on', x === b)); };
+    f.description.oninput = () => $('#descN').textContent = f.description.value.length;
+    Object.keys(lists).forEach(k => {
+      const draw = () => $('#' + k).innerHTML = lists[k].map((t, i) => `<div class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white/[.03] border border-[var(--line)] text-sm"><span class="text-blue">${ic('check', 'w-4 h-4')}</span><span class="flex-1">${esc(t)}</span><button type="button" data-i="${i}" class="text-muted hover:text-red-300">${ic('x', 'w-4 h-4')}</button></div>`).join('');
+      const add = () => { const inp = $('#' + k + 'In'), v = inp.value.trim(); if (!v) return; if (lists[k].length >= 8) return toast('8 éléments maximum.', 'error'); lists[k].push(v); inp.value = ''; draw(); inp.focus(); };
+      $('#' + k + 'Add').onclick = add;
+      $('#' + k + 'In').onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); add(); } };
+      $('#' + k).onclick = e => { const b = e.target.closest('[data-i]'); if (b) { lists[k].splice(+b.dataset.i, 1); draw(); } };
+    });
+    $('#docIn').onchange = e => {
+      [...e.target.files].forEach(x => { if (x.size > 10 * 1048576) return toast(`${x.name} dépasse 10 Mo.`, 'error'); docs.push({ name:x.name, size:(x.size / 1048576).toFixed(1).replace('.', ',') + ' Mo' }); });
+      e.target.value = ''; drawDocs();
+    };
+    const drawDocs = () => $('#docList').innerHTML = docs.map((d, i) => `<div class="flex items-center gap-3 p-3 rounded-xl bg-white/[.03] border border-[var(--line)]"><span class="text-blue">${ic('file')}</span><span class="flex-1 min-w-0 text-sm truncate">${esc(d.name)} <span class="text-xs text-muted">· ${d.size}</span></span><button type="button" data-di="${i}" class="text-muted hover:text-red-300">${ic('trash', 'w-4 h-4')}</button></div>`).join('');
+    $('#docList').onclick = e => { const b = e.target.closest('[data-di]'); if (b) { docs.splice(+b.dataset.di, 1); drawDocs(); } };
+
+    f.onsubmit = e => {
+      e.preventDefault();
+      $$('.input', f).forEach(i => i.style.borderColor = '');
+      const d = Object.fromEntries(new FormData(f));
+      const fail = (msg, el) => { toast(msg, 'error'); if (el) { el.style.borderColor = '#ef4444'; el.scrollIntoView({ behavior:'smooth', block:'center' }); } else $('#drop').scrollIntoView({ behavior:'smooth', block:'center' }); };
+      if (!imgs.length) return fail('Ajoutez au moins une image du projet.');
+      if (d.title.trim().length < 3) return fail('Le nom du projet est trop court.', f.title);
+      if (!d.category) return fail('Choisissez une catégorie.', f.category);
+      if (d.description.trim().length < 30) return fail('La description doit contenir au moins 30 caractères.', f.description);
+      if (!(+d.price > 0)) return fail('Indiquez un prix valide.', f.price);
+      if (d.minInvest && +d.minInvest > +d.price) return fail('L’investissement minimum ne peut pas dépasser le prix.', f.minInvest);
+      if (!d.location.trim()) return fail('Indiquez la localisation.', f.location);
+      if (!d.creatorName.trim()) return fail('Indiquez le nom du créateur.', f.creatorName);
+      if (!d.certify) return fail('Veuillez certifier l’exactitude des informations.');
+      const p = Projects.create({
+        title:d.title.trim(), subtitle:d.subtitle.trim(), category:d.category, description:d.description.trim(), images:imgs,
+        price:+d.price, minInvest:+d.minInvest || 0, offerType:offer, stage:d.stage, location:d.location.trim(), roi:d.roi.trim(), duration:d.duration.trim(),
+        creatorName:d.creatorName.trim(), creatorRole:d.creatorRole, contact:d.contact, creatorBio:d.creatorBio.trim(),
+        advantages:lists.adv, benefits:lists.ben, docs, tags:d.tags.split(',').map(t => t.trim()).filter(Boolean)
+      });
+      if (!p) return;
+      Auth.update({ bio:Auth.current().bio || d.creatorBio.trim(), location:Auth.current().location || d.location.trim(), role:d.creatorRole });
+      toast('Projet publié avec succès 🚀'); go('project/' + p.id);
+    };
+  };
+  return { active:'publish', html, after };
+}
+
+/* ===== MESSAGES ===== */
+function convMeta(c) {
+  const u = Auth.current(), otherId = c.userId === u.id ? c.creatorId : c.userId;
+  return { other:Users.get(otherId) || { id:otherId, name:'Utilisateur' }, p:Projects.get(c.projectId), last:c.messages.at(-1), unread:c.userId === u.id ? (c.unread || 0) : 0 };
+}
+function viewMessages() {
+  const convs = Messages.mine();
+  const html = wrap(`
+    ${pageHeader('Messages', { back:false, right:bellBtn() })}
+    <div class="relative mb-4"><span class="absolute left-4 top-1/2 -translate-y-1/2 text-muted pointer-events-none">${ic('search', 'w-[18px] h-[18px]')}</span><input id="mq" class="input" style="padding-left:2.9rem;border-radius:16px" placeholder="Rechercher une conversation…"></div>
+    <div id="mlist" class="space-y-2.5">
+      ${convs.length ? convs.map(c => { const { other, p, last, unread } = convMeta(c); return `
+        <a href="#/messages/${c.id}" data-name="${esc(norm(other.name + ' ' + (p?.title || '')))}" class="card p-3.5 flex items-center gap-3 hover:border-[rgba(30,143,255,.4)] transition ${unread ? 'border-[rgba(30,143,255,.35)]' : ''}">
+          <span class="relative">${avatar(other, 'w-12 h-12')}<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-[#05070c]"></span></span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between gap-2"><p class="font-semibold text-sm truncate">${esc(other.name)}</p><span class="text-[10.5px] text-muted shrink-0">${last ? timeAgo(last.at) : ''}</span></div>
+            <p class="text-[11px] text-blue truncate">${esc(p?.title || 'Projet supprimé')}</p>
+            <div class="flex items-center justify-between gap-2"><p class="text-xs ${unread ? 'text-white font-medium' : 'text-muted'} truncate">${last ? esc(last.text.split('\n')[0]) : 'Nouvelle conversation'}</p>${unread ? `<span class="min-w-5 h-5 px-1.5 rounded-full bg-[var(--blue)] text-[10px] font-bold grid place-items-center shrink-0">${unread}</span>` : ''}</div>
+          </div></a>`; }).join('')
+      : emptyState('msg', 'Aucun message', 'Contactez un créateur depuis la page d’un projet pour démarrer une conversation.', `<a href="#/explore" class="btn btn-primary px-5 py-3 mt-5 text-sm">Explorer les projets</a>`)}
+    </div>`);
+  const after = () => { const i = $('#mq'); i && (i.oninput = () => { const q = norm(i.value); $$('#mlist a').forEach(a => a.style.display = a.dataset.name.includes(q) ? '' : 'none'); }); };
+  return { active:'messages', html, after };
+}
+function viewThread({ id }) {
+  const u = Auth.current(), c = Messages.get(id);
+  if (!c || (c.userId !== u.id && c.creatorId !== u.id)) return { active:'messages', html:wrap(pageHeader('Conversation') + emptyState('msg', 'Conversation introuvable', 'Elle a peut-être été supprimée.')) };
+  Messages.markRead(id);
+  const { other, p } = convMeta(c);
+  const t = ts => new Date(ts).toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+  const html = wrap(`
+    <div class="sticky top-0 z-20 bg-[#05070c]/90 backdrop-blur-xl -mx-4 px-4 md:-mx-6 md:px-6 border-b border-[var(--line)]">
+      ${pageHeader('', { center:`<a href="#/creator/${other.id}" class="flex-1 flex items-center gap-3 min-w-0">${avatar(other, 'w-10 h-10')}<div class="min-w-0"><p class="font-semibold text-sm truncate">${esc(other.name)}</p><p class="text-[11px] text-emerald-400">● En ligne</p></div></a>`, right:p ? `<a href="#/project/${p.id}" class="icon-btn" aria-label="Voir le projet">${ic('eye')}</a>` : '' })}
+    </div>
+    ${p ? `<a href="#/project/${p.id}" class="card p-3 mt-4 flex items-center gap-3 hover:border-[rgba(30,143,255,.4)]"><img src="${p.images[0]}" class="w-12 h-12 rounded-xl object-cover" alt=""><div class="flex-1 min-w-0"><p class="text-sm font-medium truncate">${esc(p.title)}</p><p class="text-xs text-blue font-semibold">${fmt(p.price)}</p></div>${ic('chevR', 'w-4 h-4 text-muted')}</a>` : ''}
+    <div id="thread" class="flex flex-col gap-2.5 py-5 min-h-[40vh]">
+      ${c.messages.length ? '' : `<p class="text-center text-xs text-muted my-8">Démarrez la conversation avec ${esc(other.name)} 👋</p>`}
+      ${c.messages.map(m => { const me = m.from === u.id; return `<div class="flex ${me ? 'justify-end' : 'justify-start'}"><div class="max-w-[80%] md:max-w-[65%] px-4 py-2.5 text-sm leading-relaxed whitespace-pre-line ${me ? 'bg-gradient-to-br from-[#2ea0ff] to-[#0a6cff] rounded-[18px_18px_6px_18px] shadow-[0_8px_24px_-10px_rgba(30,143,255,.8)]' : 'card rounded-[18px_18px_18px_6px]'}">${esc(m.text)}<p class="text-[10px] mt-1 ${me ? 'text-white/70 text-right' : 'text-muted'}">${t(m.at)}</p></div></div>`; }).join('')}
+    </div>
+    <div class="h-20"></div>
+    <form id="sendF" class="fixed bottom-0 inset-x-0 lg:left-64 z-30 bg-[#05070c]/92 backdrop-blur-xl border-t border-[var(--line)] px-4 py-3 safe-b">
+      <div class="max-w-md md:max-w-3xl lg:max-w-6xl mx-auto flex gap-2.5">
+        <input name="t" autocomplete="off" class="input" style="border-radius:16px" placeholder="Écrire un message…">
+        <button class="btn btn-primary w-[50px] shrink-0 rounded-2xl" aria-label="Envoyer">${ic('send', 'w-5 h-5')}</button>
+      </div></form>`);
+  const after = () => {
+    window.scrollTo(0, document.body.scrollHeight);
+    const f = $('#sendF'); f.t.focus();
+    f.onsubmit = e => { e.preventDefault(); const v = f.t.value.trim(); if (!v) return; Messages.send(id, v); render(); };
+  };
+  return { active:'messages', hideNav:true, html, after };
+}
+
+/* ===== PROFIL ===== */
+function viewProfile() {
+  const u = Auth.current(), mine = Projects.byCreator(u.id);
+  const menu = [['favorites', 'heart', 'Mes favoris', Favs.list().length], ['messages', 'msg', 'Messages', Messages.unread()], ['notifications', 'bell', 'Notifications', Notifs.unread()], ['settings', 'settings', 'Paramètres', 0]];
+  const html = wrap(`
+    ${pageHeader('Profil', { back:false, right:`<a href="#/settings" class="icon-btn" aria-label="Paramètres">${ic('settings')}</a>` })}
+    <div class="lg:grid lg:grid-cols-[360px_1fr] lg:gap-6 lg:items-start">
+      <div class="space-y-4 lg:sticky lg:top-5">
+        <div class="card overflow-hidden">
+          <div class="h-24 hero-bg relative"><div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(#fff 1px,transparent 1px);background-size:18px 18px"></div></div>
+          <div class="px-5 pb-5 -mt-11 text-center">
+            <span class="inline-block rounded-full p-[3px] bg-gradient-to-br from-[#40c4ff] to-[#1e6fff] shadow-[0_0_30px_-4px_rgba(30,143,255,.9)]">${avatar(u, 'w-20 h-20', 'text-2xl')}</span>
+            <h2 class="text-lg font-semibold mt-2.5 flex items-center justify-center gap-1.5">${esc(u.name)}${u.verified ? `<span class="text-blue">${ic('verified', 'w-4 h-4')}</span>` : ''}</h2>
+            <p class="text-xs text-muted">${esc(u.email)}</p>
+            <div class="flex justify-center flex-wrap gap-2 mt-3"><span class="chip">${esc(u.role || 'Membre')}</span>${u.location ? `<span class="chip" style="background:rgba(255,255,255,.04);color:#cbd5e1;border-color:var(--line)">${ic('pin', 'w-3 h-3')}${esc(u.location)}</span>` : ''}</div>
+            ${u.bio ? `<p class="text-sm text-slate-300/90 mt-3 leading-relaxed">${esc(u.bio)}</p>` : ''}
+            ${!u.verified ? `<a href="#/verify?email=${encodeURIComponent(u.email)}" class="btn btn-ghost w-full mt-4 py-2.5 text-xs text-amber-300">${ic('mail', 'w-4 h-4')} Vérifier mon email</a>` : ''}
+            <a href="#/settings" class="btn btn-ghost w-full mt-4 py-2.5 text-sm">${ic('edit', 'w-4 h-4')} Modifier le profil</a>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2.5">${[['Projets', mine.length], ['Favoris', Favs.list().length], ['Messages', Messages.mine().length]].map(([l, n]) => `<div class="card py-3.5 text-center"><p class="text-xl font-bold text-blue">${n}</p><p class="text-[11px] text-muted">${l}</p></div>`).join('')}</div>
+        <div class="card divide-y divide-[var(--line)] overflow-hidden">
+          ${menu.map(([path, icn, l, n]) => `<a href="#/${path}" class="flex items-center gap-3 px-4 py-3.5 hover:bg-white/[.03] transition"><span class="w-9 h-9 rounded-xl bg-[rgba(30,143,255,.12)] text-blue grid place-items-center">${ic(icn, 'w-[18px] h-[18px]')}</span><span class="flex-1 text-sm">${l}</span>${n ? `<span class="text-[10px] font-bold min-w-5 h-5 px-1.5 rounded-full bg-[var(--blue)] grid place-items-center">${n}</span>` : ''}${ic('chevR', 'w-4 h-4 text-muted')}</a>`).join('')}
+          <button data-action="logout" class="w-full flex items-center gap-3 px-4 py-3.5 hover:bg-red-500/5 text-red-300"><span class="w-9 h-9 rounded-xl bg-red-500/10 grid place-items-center">${ic('logout', 'w-[18px] h-[18px]')}</span><span class="flex-1 text-sm text-left">Déconnexion</span></button>
+        </div>
+      </div>
+      <div class="mt-6 lg:mt-0">
+        <div class="flex items-center justify-between mb-3.5"><h2 class="text-[17px] font-semibold">Mes projets publiés</h2><a href="#/publish" class="text-[13px] text-blue font-medium flex items-center gap-1">${ic('plus', 'w-4 h-4')}Nouveau</a></div>
+        ${mine.length ? `<div class="space-y-3">${mine.map(p => `
+          <div class="card p-3 flex items-center gap-3">
+            <a href="#/project/${p.id}" class="shrink-0"><img src="${p.images[0]}" class="w-20 h-20 rounded-2xl object-cover" alt=""></a>
+            <a href="#/project/${p.id}" class="flex-1 min-w-0"><p class="font-semibold text-sm truncate">${esc(p.title)}</p><p class="text-blue font-bold text-sm">${fmt(p.price)}</p>
+              <div class="flex flex-wrap gap-x-3 gap-y-0.5 mt-1 text-[11px] text-muted"><span>${cat(p.category).name}</span><span class="flex items-center gap-1">${ic('eye', 'w-3 h-3')}${p.views || 0}</span><span class="${p.verified ? 'text-blue' : 'text-amber-300'}">${p.verified ? 'Vérifié' : 'En vérification'}</span></div></a>
+            <button data-del="${p.id}" class="icon-btn hover:text-red-300" aria-label="Supprimer">${ic('trash', 'w-4 h-4')}</button>
+          </div>`).join('')}</div>`
+        : emptyState('rocket', 'Aucun projet publié', 'Partagez votre idée avec des milliers d’acheteurs et d’investisseurs.', `<a href="#/publish" class="btn btn-primary px-5 py-3 mt-5 text-sm">${ic('plus', 'w-4 h-4')} Publier un projet</a>`)}
+      </div>
+    </div>`);
+  const after = () => $$('[data-del]').forEach(b => b.onclick = () => {
+    const p = Projects.get(b.dataset.del);
+    openSheet(`<div class="text-center"><span class="w-14 h-14 rounded-2xl bg-red-500/10 text-red-300 grid place-items-center mx-auto mb-3">${ic('trash', 'w-7 h-7')}</span><h3 class="font-semibold text-lg">Supprimer ce projet ?</h3><p class="text-sm text-muted mt-1">« ${esc(p.title)} » sera définitivement retiré de DREAMSELL.</p><div class="grid grid-cols-2 gap-3 mt-5"><button class="btn btn-ghost py-3" data-action="close-sheet">Annuler</button><button id="cDel" class="btn btn-danger py-3">Supprimer</button></div></div>`,
+      pn => $('#cDel', pn).onclick = () => { Projects.remove(p.id); closeSheet(); toast('Projet supprimé.'); render(); });
+  });
+  return { active:'profile', html, after };
+}
+
+function viewCreator({ id }) {
+  const cr = Users.get(id);
+  if (!cr) return { active:'explore', html:wrap(pageHeader('Créateur') + emptyState('user', 'Profil introuvable', 'Ce créateur n’existe pas.')) };
+  const list = Projects.byCreator(id), me = Auth.current()?.id === id;
+  const html = wrap(`
+    ${pageHeader('Profil du créateur')}
+    <div class="card p-5 md:p-6 glow relative overflow-hidden">
+      <div class="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-[var(--blue)] opacity-20 blur-3xl"></div>
+      <div class="relative flex items-center gap-4">
+        <span class="rounded-full p-[3px] bg-gradient-to-br from-[#40c4ff] to-[#1e6fff]">${avatar(cr, 'w-[72px] h-[72px]', 'text-xl')}</span>
+        <div class="min-w-0"><h2 class="text-lg md:text-xl font-bold truncate">${esc(cr.name)}</h2>
+          <p class="text-sm text-muted flex items-center gap-1">${esc(cr.role || 'Entrepreneur')} ${cr.verified ? `<span class="text-blue">${ic('verified', 'w-4 h-4')}</span>` : ''}</p>
+          <p class="text-sm mt-0.5 flex items-center gap-1">${cr.rating ? `<b>${cr.rating.toFixed(1)}</b><span class="text-amber-400">${ic('star', 'w-4 h-4', true)}</span><span class="text-muted text-xs">(${cr.reviews} avis)</span>` : '<span class="text-xs text-muted">Nouveau membre</span>'}</p></div>
+      </div>
+      ${cr.bio ? `<p class="relative text-sm text-slate-300/90 mt-4 leading-relaxed">${esc(cr.bio)}</p>` : ''}
+      <div class="relative flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs text-muted">${cr.location ? `<span class="flex items-center gap-1">${ic('pin', 'w-3.5 h-3.5')}${esc(cr.location)}</span>` : ''}<span class="flex items-center gap-1">${ic('clock', 'w-3.5 h-3.5')}Membre depuis ${new Date(cr.createdAt).toLocaleDateString('fr-FR', { month:'long', year:'numeric' })}</span></div>
+      ${!me && list.length ? `<button id="crContact" class="relative btn btn-primary w-full md:w-auto md:px-8 py-3 mt-5 text-sm">${ic('msg', 'w-4 h-4')} Contacter ${esc(cr.name)}</button>` : ''}
+    </div>
+    <div class="grid grid-cols-3 gap-2.5 mt-4">${[['Projets', list.length], ['Note', cr.rating ? cr.rating.toFixed(1) : '—'], ['Avis', cr.reviews || 0]].map(([l, n]) => `<div class="card py-3.5 text-center"><p class="text-xl font-bold text-blue">${n}</p><p class="text-[11px] text-muted">${l}</p></div>`).join('')}</div>
+    ${secHead('Projets de ' + esc(cr.name))}
+    ${list.length ? `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">${list.map(p => projectCard(p, 'w-full')).join('')}</div>` : emptyState('rocket', 'Aucun projet', 'Ce créateur n’a pas encore publié de projet.')}`);
+  return { active:'explore', html, after:() => { $('#crContact') && ($('#crContact').onclick = () => contactCreator(list[0])); } };
+}
+
+/* ===== FAVORIS ===== */
+function viewFavorites() {
+  const list = Favs.list().map(Projects.get).filter(Boolean);
+  return { active:'favorites', html:wrap(`
+    ${pageHeader('Mes favoris', { right:bellBtn() })}
+    ${!Auth.current() ? `<div class="rounded-2xl p-3.5 mb-4 bg-[rgba(30,143,255,.08)] border border-[rgba(30,143,255,.3)] text-xs text-[#a9d4ff] flex items-center gap-2">${ic('info', 'w-4 h-4 shrink-0')}<span class="flex-1">Favoris enregistrés sur cet appareil. <a href="#/login" class="underline font-semibold">Connectez-vous</a> pour les retrouver sur votre compte.</span></div>` : ''}
+    ${list.length ? `<p class="text-sm text-muted mb-3"><span class="text-white font-semibold">${list.length}</span> projet${list.length > 1 ? 's' : ''} sauvegardé${list.length > 1 ? 's' : ''}</p><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">${list.map(p => projectCard(p, 'w-full')).join('')}</div>`
+      : emptyState('heart', 'Aucun favori', 'Touchez le cœur ❤️ sur un projet pour le retrouver ici.', `<a href="#/explore" class="btn btn-primary px-5 py-3 mt-5 text-sm">Explorer les projets</a>`)}`) };
+}
+
+/* ===== AUTHENTIFICATION ===== */
+function authShell(inner) {
+  return `<div class="min-h-screen px-4 py-6 md:py-12"><div class="w-full max-w-md mx-auto">
+    <div class="flex items-center justify-between mb-8"><button class="icon-btn" data-back aria-label="Retour">${ic('back')}</button>${logo()}<span class="w-[42px]"></span></div>
+    <div class="relative"><div class="absolute -inset-12 pointer-events-none" style="background:radial-gradient(circle,rgba(30,143,255,.2),transparent 65%)"></div>
+    <div class="relative card p-6 md:p-8 glow bg-[#080c15]">${inner}</div></div>
+    <p class="text-[11px] text-muted text-center mt-6 flex items-center justify-center gap-1.5">${ic('shield', 'w-3.5 h-3.5')} Mots de passe chiffrés (SHA-256 + sel) · Données stockées localement en démo</p>
+  </div></div>`;
+}
+const googleBtn = `<div class="flex items-center gap-3 my-5 text-xs text-muted"><span class="flex-1 h-px bg-[var(--line)]"></span>ou<span class="flex-1 h-px bg-[var(--line)]"></span></div><button type="button" id="gBtn" class="btn btn-ghost w-full py-3.5 text-sm">${googleIcon} Continuer avec Google</button>`;
+function bindGoogle() { $('#gBtn').onclick = () => { try { Auth.google(); } catch (e) { toast(e.message, 'info'); } }; }
+
+function viewLogin() {
+  const html = authShell(`
+    <h1 class="text-2xl font-bold">Bon retour 👋</h1><p class="text-sm text-muted mt-1 mb-6">Connectez-vous pour accéder à votre espace DREAMSELL.</p>
+    <form id="lf" class="space-y-4">
+      ${field('Adresse email', 'email', { type:'email', ph:'vous@exemple.com', icon:'mail', req:true, extra:'autocomplete="email"' })}
+      ${field('Mot de passe', 'password', { type:'password', ph:'••••••••', icon:'lock', req:true, extra:'autocomplete="current-password"' })}
+      <div class="flex justify-end -mt-1"><a href="#/forgot" class="text-xs text-blue font-medium">Mot de passe oublié ?</a></div>
+      <button id="lBtn" class="btn btn-primary w-full py-3.5">Se connecter</button>
+    </form>
+    ${googleBtn}
+    <p class="text-sm text-muted text-center mt-6">Pas encore de compte ? <a href="#/register" class="text-blue font-semibold">S’inscrire</a></p>
+    <button id="demoFill" class="w-full mt-5 rounded-2xl p-3 bg-[rgba(30,143,255,.07)] border border-dashed border-[rgba(30,143,255,.35)] text-xs text-[#a9d4ff] text-left flex items-center gap-2.5 hover:bg-[rgba(30,143,255,.12)]">${ic('user', 'w-4 h-4 shrink-0')}<span>Compte démo : <b>demo@dreamsell.com</b> / <b>demo1234</b><br><span class="text-muted">Touchez pour remplir automatiquement</span></span></button>`);
+  const after = () => {
+    const f = $('#lf'); bindEyes(); bindGoogle();
+    $('#demoFill').onclick = () => { f.email.value = 'demo@dreamsell.com'; f.password.value = 'demo1234'; };
+    f.onsubmit = async e => {
+      e.preventDefault(); const b = $('#lBtn'); busy(b, true, 'Connexion…');
+      try { const u = await Auth.login(f.email.value, f.password.value); toast(`Bienvenue ${u.name.split(' ')[0]} 👋`); afterLogin(); }
+      catch (err) { busy(b, false); if (err.needVerify) { toast(`Mode démo — code de vérification : ${err.code}`, 'info'); go('verify?email=' + encodeURIComponent(f.email.value.trim().toLowerCase())); } else toast(err.message, 'error'); }
+    };
+  };
+  return { active:'profile', hideNav:true, html, after };
+}
+
+function viewRegister() {
+  const html = authShell(`
+    <h1 class="text-2xl font-bold">Créer un compte</h1><p class="text-sm text-muted mt-1 mb-6">Rejoignez la communauté des créateurs et investisseurs.</p>
+    <form id="rf" class="space-y-4">
+      ${field('Nom complet', 'name', { ph:'Aminata Diallo', icon:'user', req:true, extra:'autocomplete="name"' })}
+      ${field('Adresse email', 'email', { type:'email', ph:'vous@exemple.com', icon:'mail', req:true, extra:'autocomplete="email"' })}
+      <div>${field('Mot de passe', 'password', { type:'password', ph:'8 caractères minimum', icon:'lock', req:true, extra:'autocomplete="new-password"' })}
+        <div class="flex gap-1.5 mt-2">${[0, 1, 2, 3].map(i => `<span data-bar="${i}" class="h-1 flex-1 rounded-full bg-white/10 transition"></span>`).join('')}</div><p id="pwS" class="text-[11px] text-muted mt-1">Utilisez majuscules, chiffres et symboles.</p></div>
+      ${field('Confirmer le mot de passe', 'confirm', { type:'password', ph:'••••••••', icon:'lock', req:true })}
+      <label class="flex gap-2.5 text-xs text-muted items-start cursor-pointer"><input type="checkbox" name="terms" class="mt-0.5 accent-[#1e8fff]">J’accepte les conditions d’utilisation et la politique de confidentialité de DREAMSELL.</label>
+      <button id="rBtn" class="btn btn-primary w-full py-3.5">Créer mon compte</button>
+    </form>
+    ${googleBtn}
+    <p class="text-sm text-muted text-center mt-6">Déjà inscrit ? <a href="#/login" class="text-blue font-semibold">Se connecter</a></p>`);
+  const after = () => {
+    const f = $('#rf'); bindEyes(); bindGoogle();
+    f.password.oninput = () => {
+      const v = f.password.value, s = [v.length >= 8, /[A-Z]/.test(v), /\d/.test(v), /[^A-Za-z0-9]/.test(v)].filter(Boolean).length;
+      const cols = ['#ef4444', '#f59e0b', '#22c3ff', '#22c55e'], lbl = ['Faible', 'Moyen', 'Bon', 'Excellent'];
+      $$('[data-bar]').forEach((b, i) => b.style.background = i < s ? cols[s - 1] : '');
+      $('#pwS').textContent = v ? 'Sécurité : ' + (lbl[s - 1] || 'Très faible') : 'Utilisez majuscules, chiffres et symboles.';
+    };
+    f.onsubmit = async e => {
+      e.preventDefault();
+      if (f.password.value !== f.confirm.value) return toast('Les mots de passe ne correspondent pas.', 'error');
+      if (!f.terms.checked) return toast('Veuillez accepter les conditions d’utilisation.', 'error');
+      const b = $('#rBtn'); busy(b, true, 'Création…');
+      try { const code = await Auth.register({ name:f.name.value, email:f.email.value, password:f.password.value }); toast(`Mode démo — votre code de vérification : ${code}`, 'info'); go('verify?email=' + encodeURIComponent(f.email.value.trim().toLowerCase())); }
+      catch (err) { busy(b, false); toast(err.message, 'error'); }
+    };
+  };
+  return { active:'profile', hideNav:true, html, after };
+}
+
+function viewVerify(q) {
+  const email = q.email || Store.get('pending_verify', {})?.email || '';
+  const html = authShell(`
+    <span class="w-14 h-14 rounded-2xl bg-[rgba(30,143,255,.14)] text-blue grid place-items-center glow mb-4">${ic('mail', 'w-7 h-7')}</span>
+    <h1 class="text-2xl font-bold">Vérifiez votre email</h1>
+    <p class="text-sm text-muted mt-1 mb-6">Saisissez le code à 6 chiffres envoyé à <span class="text-white font-medium">${esc(email || 'votre adresse')}</span>.</p>
+    <form id="vf"><div class="flex justify-between gap-2 mb-5">${Array(6).fill(0).map((_, i) => `<input data-otp="${i}" inputmode="numeric" maxlength="1" class="input otp">`).join('')}</div>
+      <button id="vBtn" class="btn btn-primary w-full py-3.5">Vérifier mon email</button></form>
+    <p class="text-sm text-muted text-center mt-5">Code non reçu ? <button id="resend" class="text-blue font-semibold">Renvoyer</button></p>
+    <p class="text-[11px] text-muted mt-4 text-center">En mode démo, le code s’affiche dans une notification en haut de l’écran. En production, il est envoyé par email.</p>`);
+  const after = () => {
+    const inputs = $$('[data-otp]'); inputs[0].focus();
+    inputs.forEach((inp, i) => {
+      inp.oninput = () => { inp.value = inp.value.replace(/\D/g, '').slice(-1); if (inp.value && inputs[i + 1]) inputs[i + 1].focus(); };
+      inp.onkeydown = e => { if (e.key === 'Backspace' && !inp.value && inputs[i - 1]) inputs[i - 1].focus(); };
+      inp.onpaste = e => { e.preventDefault(); const d = (e.clipboardData.getData('text').match(/\d/g) || []).slice(0, 6); d.forEach((v, j) => inputs[j].value = v); inputs[Math.min(d.length, 5)].focus(); };
+    });
+    $('#resend').onclick = () => { if (!email) return toast('Adresse email inconnue, inscrivez-vous à nouveau.', 'error'); toast(`Mode démo — nouveau code : ${Auth.sendVerification(email)}`, 'info'); };
+    $('#vf').onsubmit = e => {
+      e.preventDefault(); const code = inputs.map(i => i.value).join('');
+      if (code.length < 6) return toast('Saisissez les 6 chiffres.', 'error');
+      try { const u = Auth.verify(email, code); toast(`Email vérifié ✅ Bienvenue ${u.name.split(' ')[0]} !`); afterLogin(); }
+      catch (err) { toast(err.message, 'error'); }
+    };
+  };
+  return { active:'profile', hideNav:true, html, after };
+}
+
+function viewForgot() {
+  const html = authShell(`<div id="fw"></div>`);
+  const after = () => {
+    let email = '';
+    const step1 = () => {
+      $('#fw').innerHTML = `<span class="w-14 h-14 rounded-2xl bg-[rgba(30,143,255,.14)] text-blue grid place-items-center glow mb-4">${ic('lock', 'w-7 h-7')}</span>
+        <h1 class="text-2xl font-bold">Mot de passe oublié</h1><p class="text-sm text-muted mt-1 mb-6">Entrez votre email, nous vous enverrons un code de réinitialisation.</p>
+        <form id="f1" class="space-y-4">${field('Adresse email', 'email', { type:'email', ph:'vous@exemple.com', icon:'mail', req:true })}<button class="btn btn-primary w-full py-3.5">Envoyer le code</button></form>
+        <p class="text-sm text-muted text-center mt-6"><a href="#/login" class="text-blue font-semibold">Retour à la connexion</a></p>`;
+      $('#f1').onsubmit = e => { e.preventDefault(); try { email = e.target.email.value.trim().toLowerCase(); const code = Auth.requestReset(email); toast(`Mode démo — code de réinitialisation : ${code}`, 'info'); step2(); } catch (err) { toast(err.message, 'error'); } };
+    };
+    const step2 = () => {
+      $('#fw').innerHTML = `<h1 class="text-2xl font-bold">Nouveau mot de passe</h1><p class="text-sm text-muted mt-1 mb-6">Code envoyé à <span class="text-white">${esc(email)}</span>.</p>
+        <form id="f2" class="space-y-4">${field('Code reçu', 'code', { ph:'123456', icon:'shield', req:true, extra:'inputmode="numeric" maxlength="6"' })}${field('Nouveau mot de passe', 'pwd', { type:'password', ph:'8 caractères minimum', icon:'lock', req:true })}${field('Confirmer', 'pwd2', { type:'password', ph:'••••••••', icon:'lock', req:true })}
+        <button id="f2b" class="btn btn-primary w-full py-3.5">Réinitialiser</button></form>
+        <button id="back1" class="text-sm text-blue font-medium mt-5 w-full">Changer d’adresse email</button>`;
+      bindEyes(); $('#back1').onclick = step1;
+      $('#f2').onsubmit = async e => {
+        e.preventDefault(); const f = e.target;
+        if (f.pwd.value !== f.pwd2.value) return toast('Les mots de passe ne correspondent pas.', 'error');
+        try { await Auth.resetPassword(email, f.code.value.trim(), f.pwd.value); toast('Mot de passe réinitialisé ✅ Connectez-vous.'); go('login'); } catch (err) { toast(err.message, 'error'); }
+      };
+    };
+    step1();
+  };
+  return { active:'profile', hideNav:true, html, after };
+}
+
+/* ===== NOTIFICATIONS ===== */
+function viewNotifications() {
+  const list = Notifs.list();
+  const html = wrap(`
+    ${pageHeader('Notifications', { right:list.some(n => !n.read) ? `<button id="readAll" class="text-xs text-blue font-medium px-2">Tout lire</button>` : '' })}
+    ${list.length ? `<div class="space-y-2.5">${list.map(n => `
+      <button data-n="${n.id}" data-link="${esc(n.link || '')}" class="card w-full p-3.5 flex gap-3 text-left hover:border-[rgba(30,143,255,.4)] transition ${n.read ? 'opacity-70' : 'border-[rgba(30,143,255,.3)] bg-[rgba(30,143,255,.04)]'}">
+        <span class="w-11 h-11 rounded-xl bg-[rgba(30,143,255,.13)] text-blue grid place-items-center shrink-0">${ic(n.icon || 'bell')}</span>
+        <span class="flex-1 min-w-0"><span class="flex items-center justify-between gap-2"><span class="font-semibold text-sm">${esc(n.title)}</span><span class="text-[10.5px] text-muted shrink-0">${timeAgo(n.at)}</span></span><span class="block text-xs text-muted mt-0.5">${esc(n.text)}</span></span>
+        ${n.read ? '' : '<span class="w-2 h-2 rounded-full bg-[var(--blue)] mt-2 shrink-0 shadow-[0_0_10px_rgba(30,143,255,.9)]"></span>'}
+      </button>`).join('')}</div>`
+    : emptyState('bell', 'Aucune notification', 'Vous serez notifié des messages, publications et activités sur vos projets.')}`);
+  const after = () => {
+    $('#readAll') && ($('#readAll').onclick = () => { Notifs.markAll(); render(); });
+    $$('[data-n]').forEach(b => b.onclick = () => { Notifs.read(b.dataset.n); b.dataset.link ? go(b.dataset.link) : render(); });
+  };
+  return { active:'notifications', html, after };
+}
+
+/* ===== PARAMÈTRES ===== */
+function viewSettings() {
+  const u = Auth.current(), prefs = Store.get('prefs', { email:true, push:true, news:false, public:true });
+  const box = (title, body, icn) => `<section class="card p-4 md:p-5"><h2 class="font-semibold mb-4 flex items-center gap-2"><span class="text-blue">${ic(icn, 'w-[18px] h-[18px]')}</span>${title}</h2>${body}</section>`;
+  const tg = (k, l, d) => `<div class="flex items-center justify-between gap-4 py-2.5"><div><p class="text-sm">${l}</p><p class="text-[11px] text-muted">${d}</p></div><button type="button" data-pref="${k}" class="toggle ${prefs[k] ? 'on' : ''}" aria-label="${l}"></button></div>`;
+  const html = wrap(`
+    ${pageHeader('Paramètres')}
+    <div class="grid gap-4 lg:grid-cols-2 lg:items-start">
+      ${box('Mon profil', `<form id="sf" class="space-y-4">
+        <div class="flex items-center gap-4"><span id="avPrev">${avatar(u, 'w-16 h-16', 'text-xl')}</span><div class="flex flex-col gap-1.5"><label class="btn btn-ghost px-4 py-2 text-xs cursor-pointer">${ic('image', 'w-4 h-4')} Changer la photo<input id="avIn" type="file" accept="image/*" class="hidden"></label>${u.avatar ? '<button type="button" id="avRm" class="text-[11px] text-red-300 text-left">Retirer la photo</button>' : ''}</div></div>
+        ${field('Nom complet', 'name', { value:u.name, icon:'user', req:true })}
+        <div class="grid grid-cols-2 gap-3"><div><label class="label">Statut</label><select name="role" class="input">${['Membre', 'Entrepreneur', 'Startup', 'Entreprise', 'Investisseur', 'Investisseuse'].map(r => `<option ${u.role === r ? 'selected' : ''}>${r}</option>`).join('')}</select></div>${field('Localisation', 'location', { value:u.location || '', icon:'pin', ph:'Ville, Pays' })}</div>
+        <div><label class="label">Bio</label><textarea name="bio" class="input" style="min-height:80px" maxlength="300">${esc(u.bio || '')}</textarea></div>
+        <button class="btn btn-primary w-full py-3 text-sm">Enregistrer</button></form>`, 'user')}
+      <div class="space-y-4">
+        ${box('Compte & sécurité', `
+          <div class="flex items-center justify-between gap-3 p-3 rounded-xl bg-white/[.03] border border-[var(--line)] mb-4"><div class="min-w-0"><p class="text-sm truncate">${esc(u.email)}</p><p class="text-[11px] ${u.verified ? 'text-emerald-400' : 'text-amber-300'}">${u.verified ? '✓ Email vérifié' : 'Email non vérifié'}</p></div>${u.verified ? '' : `<a href="#/verify?email=${encodeURIComponent(u.email)}" id="goVerify" class="btn btn-ghost px-3 py-2 text-xs">Vérifier</a>`}</div>
+          <form id="pf" class="space-y-3">${field('Mot de passe actuel', 'old', { type:'password', icon:'lock', req:true })}${field('Nouveau mot de passe', 'new', { type:'password', icon:'lock', req:true, ph:'8 caractères minimum' })}<button class="btn btn-ghost w-full py-3 text-sm">Changer le mot de passe</button></form>`, 'shield')}
+        ${box('Préférences', `<div class="divide-y divide-[var(--line)]">${tg('email', 'Notifications par email', 'Messages et activité de vos projets')}${tg('push', 'Notifications push', 'Alertes en temps réel sur l’appareil')}${tg('news', 'Newsletter DREAMSELL', 'Sélection hebdomadaire de projets')}${tg('public', 'Profil public', 'Visible par les autres membres')}</div>
+          <div class="grid grid-cols-2 gap-3 mt-3"><div><label class="label">Langue</label><select class="input" disabled><option>Français</option></select></div><div><label class="label">Devise</label><select class="input" disabled><option>FCFA (XOF)</option></select></div></div>`, 'settings')}
+        ${box('Données & compte', `<div class="space-y-2.5">
+          <button id="resetDemo" class="btn btn-ghost w-full py-3 text-sm">${ic('refresh', 'w-4 h-4')} Réinitialiser les données de démo</button>
+          <button data-action="logout" class="btn btn-ghost w-full py-3 text-sm">${ic('logout', 'w-4 h-4')} Déconnexion</button>
+          <button id="delAcc" class="btn btn-danger w-full py-3 text-sm">${ic('trash', 'w-4 h-4')} Supprimer mon compte</button></div>`, 'layers')}
+        <div class="card p-4 text-xs text-muted leading-relaxed"><div class="flex items-center gap-2 mb-2">${logoMark('w-6 h-6')}<span class="font-semibold text-white">DREAMSELL v1.0</span><span class="chip">Démo</span></div>Modules prévus : paiements sécurisés, vérification des projets, notation, commissions, modération et tableau de bord administrateur.</div>
+      </div>
+    </div>`);
+  const confirmBox = (title, text, label, fn) => openSheet(`<div class="text-center"><span class="w-14 h-14 rounded-2xl bg-red-500/10 text-red-300 grid place-items-center mx-auto mb-3">${ic('info', 'w-7 h-7')}</span><h3 class="font-semibold text-lg">${title}</h3><p class="text-sm text-muted mt-1">${text}</p><div class="grid grid-cols-2 gap-3 mt-5"><button class="btn btn-ghost py-3" data-action="close-sheet">Annuler</button><button id="cOk" class="btn btn-danger py-3">${label}</button></div></div>`, p => $('#cOk', p).onclick = fn);
+  const after = () => {
+    bindEyes();
+    const sf = $('#sf');
+    $('#avIn').onchange = async e => { const file = e.target.files[0]; if (!file) return; try { Auth.update({ avatar:await compressImage(file, 300, .8) }); toast('Photo mise à jour'); render(); } catch { toast('Image invalide', 'error'); } };
+    $('#avRm') && ($('#avRm').onclick = () => { Auth.update({ avatar:null }); render(); });
+    sf.onsubmit = e => { e.preventDefault(); if (sf.name.value.trim().length < 2) return toast('Nom trop court.', 'error'); Auth.update({ name:sf.name.value.trim(), role:sf.role.value, location:sf.location.value.trim(), bio:sf.bio.value.trim() }); toast('Profil enregistré ✅'); render(); };
+    $('#goVerify') && ($('#goVerify').onclick = () => toast(`Mode démo — code : ${Auth.sendVerification(u.email)}`, 'info'));
+    $('#pf').onsubmit = async e => { e.preventDefault(); try { await Auth.changePassword(e.target.old.value, e.target.new.value); e.target.reset(); toast('Mot de passe modifié ✅'); } catch (err) { toast(err.message, 'error'); } };
+    $$('[data-pref]').forEach(b => b.onclick = () => { prefs[b.dataset.pref] = !prefs[b.dataset.pref]; b.classList.toggle('on'); Store.set('prefs', prefs); });
+    $('#resetDemo').onclick = () => confirmBox('Réinitialiser la démo ?', 'Tous les projets, messages et comptes créés seront effacés.', 'Réinitialiser', async () => { Object.keys(localStorage).filter(k => k.startsWith('ds_')).forEach(k => localStorage.removeItem(k)); await seed(true); closeSheet(); toast('Données réinitialisées'); go(''); render(); });
+    $('#delAcc').onclick = () => confirmBox('Supprimer votre compte ?', 'Votre profil et vos projets seront définitivement supprimés.', 'Supprimer', () => { Auth.deleteAccount(); closeSheet(); toast('Compte supprimé.'); go(''); render(); });
+  };
+  return { active:'settings', html, after };
+}
+
+
+/* ---------- 7. ROUTEUR ---------- */
+let currentRoute = { active:'home' };
+const ROUTES = [
+  ['', viewHome], ['explore', q => viewListing('explore', q)], ['search', q => viewListing('search', q)], ['categories', viewCategories],
+  ['project/:id', viewProject], ['publish', viewPublish, true], ['messages', viewMessages, true], ['messages/:id', viewThread, true],
+  ['profile', viewProfile, true], ['creator/:id', viewCreator], ['favorites', viewFavorites], ['login', viewLogin], ['register', viewRegister],
+  ['forgot', viewForgot], ['verify', viewVerify], ['notifications', viewNotifications, true], ['settings', viewSettings, true]
+];
+function parseHash() { const h = decodeURIComponent(location.hash.replace(/^#\/?/, '')); const [path, qs] = h.split('?'); return { path:path.replace(/\/$/, ''), query:Object.fromEntries(new URLSearchParams(qs || '')) }; }
+function matchRoute(pat, path) {
+  const a = pat.split('/'), b = path.split('/'); if (a.length !== b.length) return null; const params = {};
+  for (let i = 0; i < a.length; i++) { if (a[i].startsWith(':')) params[a[i].slice(1)] = b[i]; else if (a[i] !== b[i]) return null; }
+  return params;
+}
+function go(path) { location.hash = '#/' + path; }
+function render() {
+  const { path, query } = parseHash();
+  closeSheet(); closeDrawer();
+  for (const [pat, fn, needAuth] of ROUTES) {
+    const params = matchRoute(pat, path); if (!params) continue;
+    if (needAuth && !Auth.current()) { sessionStorage.setItem('ds_redirect', location.hash); toast('Connectez-vous pour accéder à cette page.', 'info'); return go('login'); }
+    const r = pat.includes(':') ? fn(params, query) : fn(query);
+    currentRoute = { active:r.active || '', hideNav:!!r.hideNav };
+    $('#view').innerHTML = `<div class="fade-in ${r.hideNav ? 'pb-10' : 'pb-32'} lg:pb-12">${r.html}</div>`;
+    renderChrome(); window.scrollTo(0, 0); r.after && r.after();
+    return;
+  }
+  currentRoute = { active:'' };
+  $('#view').innerHTML = wrap(pageHeader('Page introuvable') + emptyState('compass', 'Page introuvable', 'Cette page n’existe pas ou a été déplacée.', `<a href="#/" class="btn btn-primary px-5 py-3 mt-5 text-sm">Retour à l’accueil</a>`));
+  renderChrome();
+}
+function afterLogin() { const r = sessionStorage.getItem('ds_redirect'); sessionStorage.removeItem('ds_redirect'); location.hash = r && !/login|register|verify|forgot/.test(r) ? r : '#/'; }
+
+/* Événements globaux délégués */
+document.addEventListener('click', e => {
+  const fav = e.target.closest('[data-fav]');
+  if (fav) {
+    e.preventDefault(); e.stopPropagation();
+    const id = fav.dataset.fav, on = Favs.toggle(id);
+    $$(`[data-fav="${id}"]`).forEach(b => b.classList.toggle('is-fav', on));
+    toast(on ? 'Ajouté aux favoris ❤️' : 'Retiré des favoris');
+    if (currentRoute.active === 'favorites' && !on) render(); else $('#sidebar').innerHTML = navMenu('side');
+    return;
+  }
+  const back = e.target.closest('[data-back]');
+  if (back) { e.preventDefault(); history.length > 1 ? history.back() : go(''); return; }
+  const g = e.target.closest('[data-go]');
+  if (g && !e.target.closest('a[href],button:not([data-go])')) { go(g.dataset.go); return; }
+  if (g && g.tagName === 'BUTTON') { go(g.dataset.go); return; }
+  const a = e.target.closest('[data-action]');
+  if (!a) return;
+  const act = a.dataset.action;
+  if (act === 'drawer') openDrawer();
+  else if (act === 'close-drawer') closeDrawer();
+  else if (act === 'close-sheet') closeSheet();
+  else if (act === 'filters') openFilters(parseHash().query);
+  else if (act === 'logout') { Auth.logout(); closeDrawer(); toast('Vous êtes déconnecté.'); go(''); render(); }
+});
+document.addEventListener('submit', e => {
+  const f = e.target.closest('form[data-search]'); if (!f) return;
+  e.preventDefault(); const q = new FormData(f).get('q').trim();
+  if (q) { const r = Store.get('recent', []).filter(x => x !== q); r.unshift(q); Store.set('recent', r.slice(0, 6)); }
+  go('search' + (q ? '?q=' + encodeURIComponent(q) : ''));
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeSheet(); closeDrawer(); } });
+window.addEventListener('hashchange', render);
+
+(async () => { await seed(); render(); })();
+</script>
+</body>
+</html>
