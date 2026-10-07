@@ -1284,9 +1284,13 @@ function viewVerify(q) {
     $('#vf').onsubmit = e => {
       e.preventDefault(); const code = inputs.map(i => i.value).join('');
       if (code.length < 8) return toast('Saisissez les 8 chiffres.', 'error');
-      try { const u = Auth.verify(email, code); toast(`Email vérifié ✅ Bienvenue ${u.name.split(' ')[0]} !`); afterLogin(); }
-      catch (err) { toast(err.message, 'error'); }
-    };
+      try {
+  const u = await Auth.verify(email, code);
+  toast('Email vérifié ✅ Bienvenue sur DREAMSell !');
+  afterLogin();
+}
+catch (err) {
+  toast(err.message, 'error');
   };
   return { active:'profile', hideNav:true, html, after };
 }
