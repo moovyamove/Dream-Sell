@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#05070c">
@@ -1396,5 +1397,15 @@ window.addEventListener('hashchange', render);
 </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>
+  <script>
+  const SUPABASE_URL = 'https://tnxmpubkdbiwihfahcrb.supabase.co/rest/v1/';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRueG1wdWJrZGJpd2loZmFoY3JiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEzNTk0MTIsImV4cCI6MjEwNjkzNTQxMn0.8iuS1npbJTSKlb6q9Sp83hmD4I4T6j0XFeIdyYym84Y';
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
+</script>
+  
 </body>
 </html>
