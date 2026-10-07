@@ -366,11 +366,18 @@ const Auth = {
 
   return null;
   },
-  sendVerification(email) {
-    const code = Auth._code();
-    Store.set('pending_verify', { email, code, exp:Date.now() + 15 * 60000 });
-    return code; // En production : envoyé par email (Resend, SendGrid, Supabase Auth…)
-  },
+  async sendVerification(email) {
+  const { error } = await supabaseClient.auth.signInWithOtp({
+    email: email.trim().toLowerCase(),
+    options: {
+      shouldCreateUser: false
+    }
+  });
+
+  if (error) throw new Error(error.message);
+
+  return true;
+},
   verify(email, code) {
     const p = Store.get('pending_verify', null);
     if (!p || p.email !== email) throw new Error('Aucune vérification en attente pour cet email.');
