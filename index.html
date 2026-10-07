@@ -1269,7 +1269,7 @@ function viewVerify(q) {
     <span class="w-14 h-14 rounded-2xl bg-[rgba(30,143,255,.14)] text-blue grid place-items-center glow mb-4">${ic('mail', 'w-7 h-7')}</span>
     <h1 class="text-2xl font-bold">Vérifiez votre email</h1>
     <p class="text-sm text-muted mt-1 mb-6">Saisissez le code à 6 chiffres envoyé à <span class="text-white font-medium">${esc(email || 'votre adresse')}</span>.</p>
-    <form id="vf"><div class="flex justify-between gap-2 mb-5">${Array(6).fill(0).map((_, i) => `<input data-otp="${i}" inputmode="numeric" maxlength="1" class="input otp">`).join('')}</div>
+    <form id="vf"><div class="flex justify-between gap-2 mb-5">${Array(8).fill(0).map((_, i) => `<input data-otp="${i}" inputmode="numeric" maxlength="1" class="input otp">`).join('')}</div>
       <button id="vBtn" class="btn btn-primary w-full py-3.5">Vérifier mon email</button></form>
     <p class="text-sm text-muted text-center mt-5">Code non reçu ? <button id="resend" class="text-blue font-semibold">Renvoyer</button></p>
     <p class="text-[11px] text-muted mt-4 text-center">En mode démo, le code s’affiche dans une notification en haut de l’écran. En production, il est envoyé par email.</p>`);
@@ -1278,7 +1278,7 @@ function viewVerify(q) {
     inputs.forEach((inp, i) => {
       inp.oninput = () => { inp.value = inp.value.replace(/\D/g, '').slice(-1); if (inp.value && inputs[i + 1]) inputs[i + 1].focus(); };
       inp.onkeydown = e => { if (e.key === 'Backspace' && !inp.value && inputs[i - 1]) inputs[i - 1].focus(); };
-      inp.onpaste = e => { e.preventDefault(); const d = (e.clipboardData.getData('text').match(/\d/g) || []).slice(0, 6); d.forEach((v, j) => inputs[j].value = v); inputs[Math.min(d.length, 5)].focus(); };
+      inp.onpaste = e => { e.preventDefault(); const d = (e.clipboardData.getData('text').match(/\d/g) || []).slice(0, 8); d.forEach((v, j) => inputs[j].value = v); inputs[Math.min(d.length, 7)].focus(); };
     });
     $('#resend').onclick = () => { if (!email) return toast('Adresse email inconnue, inscrivez-vous à nouveau.', 'error'); toast(`Mode démo — nouveau code : ${Auth.sendVerification(email)}`, 'info'); };
     $('#vf').onsubmit = e => {
