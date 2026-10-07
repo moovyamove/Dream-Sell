@@ -1283,14 +1283,10 @@ function viewVerify(q) {
     $('#resend').onclick = () => { if (!email) return toast('Adresse email inconnue, inscrivez-vous à nouveau.', 'error'); toast(`Mode démo — nouveau code : ${Auth.sendVerification(email)}`, 'info'); };
     $('#vf').onsubmit = e => {
       e.preventDefault(); const code = inputs.map(i => i.value).join('');
-      if (code.length < 8) return toast('Saisissez les 8 chiffres.', 'error');
-      try {
-  const u = await Auth.verify(email, code);
-  toast('Email vérifié ✅ Bienvenue sur DREAMSell !');
-  afterLogin();
-}
-catch (err) {
-  toast(err.message, 'error');
+      if (code.length < 8) return toast('Saisissez les 6 chiffres.', 'error');
+      try { const u = Auth.verify(email, code); toast(`Email vérifié ✅ Bienvenue ${u.name.split(' ')[0]} !`); afterLogin(); }
+      catch (err) { toast(err.message, 'error'); }
+    };
   };
   return { active:'profile', hideNav:true, html, after };
 }
