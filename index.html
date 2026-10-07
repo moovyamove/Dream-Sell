@@ -326,15 +326,45 @@ const Auth = {
   current() { const id = Store.get('session', null); return id ? Users.get(id) : null; },
   _code() { return String(Math.floor(100000 + Math.random() * 900000)); },
   async register({ name, email, password }) {
-    name = name.trim(); email = email.trim().toLowerCase();
-    if (name.length < 2) throw new Error('Veuillez saisir votre nom complet.');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Adresse email invalide.');
-    if (password.length < 8) throw new Error('Le mot de passe doit contenir au moins 8 caractères.');
-    if (Users.byEmail(email)) throw new Error('Un compte existe déjà avec cet email.');
-    const salt = uid('s');
-    const u = { id:uid('u'), name, email, salt, pass:await hashPwd(password, salt), verified:false, role:'Membre', location:'', bio:'', createdAt:Date.now(), rating:0, reviews:0 };
-    Users.save(u);
-    return Auth.sendVerification(email);
+  name = name.trim();
+  email = email.trim().toLowerCase();
+
+  if (name.length < 2) throw new Error('Veuillez saisir votre nom complet.');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Adresse email invalide.');
+  if (password.length < 8) throw new Error('Le mot de passe doit contenir au moins 8 caractères.');
+  if (Users.byEmail(email)) throw new Error('Un compte existe déjà avec cet email.');
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        name
+      }
+    }
+  });
+
+  if (error) throw new Error(error.message);
+
+  const salt = uid('s');
+  const u = {
+    id: uid('u'),
+    name,
+    email,
+    salt,
+    pass: await hashPwd(password, salt),
+    verified: false,
+    role: 'Membre',
+    location: '',
+    bio: '',
+    createdAt: Date.now(),
+    rating: 0,
+    reviews: 0
+  };
+
+  Users.save(u);
+
+  return null;
   },
   sendVerification(email) {
     const code = Auth._code();
