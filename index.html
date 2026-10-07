@@ -378,16 +378,35 @@ const Auth = {
 
   return true;
 },
-  verify(email, code) {
-    const p = Store.get('pending_verify', null);
-    if (!p || p.email !== email) throw new Error('Aucune vérification en attente pour cet email.');
-    if (Date.now() > p.exp) throw new Error('Code expiré, demandez-en un nouveau.');
-    if (p.code !== code) throw new Error('Code incorrect.');
-    const u = Users.byEmail(email); u.verified = true; Users.save(u);
-    Store.del('pending_verify'); Store.set('session', u.id);
-    Notifs.add(u.id, { icon:'rocket', title:'Bienvenue sur DREAMSELL 🎉', text:'Votre email est vérifié. Publiez votre premier projet !', link:'publish' });
+  async verify(email, code) {
+  const { data, error } = await supabaseClient.auth.verifyOtp({
+    email: email.trim().toLowerCase(),
+    token: code.trim(),
+    type: 'email'
+  });
+
+  if (error) throw new Error(error.message);
+
+  const u = Users.byEmail(email);
+
+  if (u) {
+    u.verified = true;
+    Users.save(u);
+    Store.del('pending_verify');
+    Store.set('session', u.id);
+
+    Notifs.add(u.id, {
+      icon: 'rocket',
+      title: 'Bienvenue sur DREAMSELL 🎉',
+      text: 'Votre email est vérifié. Publiez votre premier projet !',
+      link: 'publish'
+    });
+
     return u;
-  },
+  }
+
+  return data.user;
+},
   async login(email, password) {
     const u = Users.byEmail(email);
     if (!u || !u.pass || u.pass !== await hashPwd(password, u.salt)) throw new Error('Email ou mot de passe incorrect.');
