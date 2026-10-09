@@ -1295,13 +1295,36 @@ function viewVerify(q) {
       inp.onkeydown = e => { if (e.key === 'Backspace' && !inp.value && inputs[i - 1]) inputs[i - 1].focus(); };
       inp.onpaste = e => { e.preventDefault(); const d = (e.clipboardData.getData('text').match(/\d/g) || []).slice(0, 8); d.forEach((v, j) => inputs[j].value = v); inputs[Math.min(d.length, 7)].focus(); };
     });
-    $('#resend').onclick = () => { if (!email) return toast('Adresse email inconnue, inscrivez-vous à nouveau.', 'error'); toast(`Mode démo — nouveau code : ${Auth.sendVerification(email)}`, 'info'); };
-    $('#vf').onsubmit = e => {
-      e.preventDefault(); const code = inputs.map(i => i.value).join('');
-      if (code.length < 8) return toast('Saisissez les 6 chiffres.', 'error');
-      try { const u = Auth.verify(email, code); toast(`Email vérifié ✅ Bienvenue ${u.name.split(' ')[0]} !`); afterLogin(); }
-      catch (err) { toast(err.message, 'error'); }
-    };
+    $('#resend').onclick = async () => {
+  if (!email) {
+    return toast('Adresse email inconnue, inscrivez-vous à nouveau.', 'error');
+  }
+
+  try {
+    await Auth.sendVerification(email);
+    toast('Un nouveau code a été envoyé par email. Vérifiez aussi vos spams.', 'info');
+  } catch (err) {
+    toast(err.message, 'error');
+  }
+};
+
+$('#vf').onsubmit = async e => {
+  e.preventDefault();
+
+  const code = inputs.map(i => i.value).join('');
+
+  if (code.length < 8) {
+    return toast('Saisissez les 8 chiffres du code.', 'error');
+  }
+
+  try {
+    const u = await Auth.verify(email, code);
+    toast('Email vérifié ! Bienvenue sur DREAMSell 🎉');
+    afterLogin();
+  } catch (err) {
+    toast(err.message, 'error');
+  }
+};
   };
   return { active:'profile', hideNav:true, html, after };
 }
