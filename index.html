@@ -1256,8 +1256,23 @@ function viewRegister() {
       if (f.password.value !== f.confirm.value) return toast('Les mots de passe ne correspondent pas.', 'error');
       if (!f.terms.checked) return toast('Veuillez accepter les conditions d’utilisation.', 'error');
       const b = $('#rBtn'); busy(b, true, 'Création…');
-      try { const code = await Auth.register({ name:f.name.value, email:f.email.value, password:f.password.value }); toast(`Mode démo — votre code de vérification : ${code}`, 'info'); go('verify?email=' + encodeURIComponent(f.email.value.trim().toLowerCase())); }
-      catch (err) { busy(b, false); toast(err.message, 'error'); }
+      
+try {
+  await Auth.register({
+    name: f.name.value,
+    email: f.email.value,
+    password: f.password.value
+  });
+
+  toast('Un code de confirmation a été envoyé par email. Vérifiez aussi vos spams.', 'info');
+
+  go('verify?email=' + encodeURIComponent(f.email.value.trim().toLowerCase()));
+}
+catch (err) {
+  busy(b, false);
+  toast(err.message, 'error');
+}
+      
     };
   };
   return { active:'profile', hideNav:true, html, after };
