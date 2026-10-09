@@ -366,17 +366,18 @@ const Auth = {
 
   return null;
   },
-  async sendVerification(email) {
-  const { error } = await supabaseClient.auth.signInWithOtp({
-    email: email.trim().toLowerCase(),
-    options: {
-      shouldCreateUser: false
-    }
+  
+async sendVerification(email) {
+  const { error } = await supabaseClient.auth.resend({
+    type: 'signup',
+    email: email.trim().toLowerCase()
   });
 
   if (error) throw new Error(error.message);
 
   return true;
+},
+  
 },
   async verify(email, code) {
   const { data, error } = await supabaseClient.auth.verifyOtp({
