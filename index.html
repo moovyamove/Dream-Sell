@@ -341,7 +341,6 @@ const Auth = {
       data: {
         name
       }
-    }
   });
 
   if (error) throw new Error(error.message);
@@ -377,6 +376,7 @@ async sendVerification(email) {
 
   return true;
 },
+  
   async verify(email, code) {
   const { data, error } = await supabaseClient.auth.verifyOtp({
     email: email.trim().toLowerCase(),
