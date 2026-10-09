@@ -411,7 +411,12 @@ async sendVerification(email) {
   async login(email, password) {
     const u = Users.byEmail(email);
     if (!u || !u.pass || u.pass !== await hashPwd(password, u.salt)) throw new Error('Email ou mot de passe incorrect.');
-    if (!u.verified) { const code = Auth.sendVerification(u.email); const e = new Error('Veuillez vérifier votre email.'); e.needVerify = true; e.code = code; throw e; }
+    if (!u.verified) {
+  await Auth.sendVerification(u.email);
+  const e = new Error('Veuillez vérifier votre email. Un nouveau code a été envoyé.');
+  e.needVerify = true;
+  throw e;
+    }
     Store.set('session', u.id); return u;
   },
   logout() { Store.del('session'); },
