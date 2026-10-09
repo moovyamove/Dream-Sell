@@ -383,7 +383,7 @@ async sendVerification(email) {
   const { data, error } = await supabaseClient.auth.verifyOtp({
     email: email.trim().toLowerCase(),
     token: code.trim(),
-    type: 'email'
+    type: 'signup'
   });
 
   if (error) throw new Error(error.message);
