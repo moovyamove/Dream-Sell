@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#05070c">
@@ -98,18 +99,6 @@ textarea.input{resize:vertical;min-height:110px}
 <!-- Toast -->
 <div id="toast" class="fixed top-4 left-1/2 -translate-x-1/2 z-[60] pointer-events-none flex flex-col gap-2 items-center w-[92%] max-w-sm"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
-<script>
-  // Initialisation Supabase protégée : si le CDN est bloqué, l'application s'affiche quand même.
-  var SUPABASE_URL = 'https://tnxmpubkdbiwihfahcrb.supabase.co';
-  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRueG1wdWJrZGJpd2loZmFoY3JiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEzNTk0MTIsImV4cCI6MjEwNjkzNTQxMn0.8iuS1npbJTSKlb6q9Sp83hmD4I4T6j0XFeIdyYym84Y';
-  var supabaseClient = null;
-  try {
-    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  } catch (e) {
-    console.error('Supabase indisponible :', e);
-  }
-</script>
 <script>
 /* ==========================================================================
    DREAMSELL – Application monopage (SPA)
@@ -296,7 +285,7 @@ function seedData() {
 const Store = {
   get(k, d) { try { const v = localStorage.getItem('ds_' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
   set(k, v) { try { localStorage.setItem('ds_' + k, JSON.stringify(v)); return true; } catch (e) { toast('Stockage local plein : réduisez le nombre ou la taille des images.', 'error'); return false; } },
-  del(k) { try { localStorage.removeItem('ds_' + k); } catch {} }
+  del(k) { localStorage.removeItem('ds_' + k); }
 };
 async function hashPwd(pwd, salt) {
   if (window.crypto?.subtle) {
@@ -345,7 +334,6 @@ const Auth = {
   if (password.length < 8) throw new Error('Le mot de passe doit contenir au moins 8 caractères.');
   if (Users.byEmail(email)) throw new Error('Un compte existe déjà avec cet email.');
 
-  if (!supabaseClient) throw new Error('Service d’authentification indisponible. Vérifiez votre connexion.');
   const { data, error } = await supabaseClient.auth.signUp({
     email,
     password,
@@ -353,7 +341,6 @@ const Auth = {
       data: {
         name
       }
-    }
   });
 
   if (error) throw new Error(error.message);
@@ -380,7 +367,6 @@ const Auth = {
   },
   
 async sendVerification(email) {
-  if (!supabaseClient) throw new Error('Service d’authentification indisponible.');
   const { error } = await supabaseClient.auth.resend({
     type: 'signup',
     email: email.trim().toLowerCase()
@@ -390,8 +376,8 @@ async sendVerification(email) {
 
   return true;
 },
+  
   async verify(email, code) {
-  if (!supabaseClient) throw new Error('Service d’authentification indisponible.');
   const { data, error } = await supabaseClient.auth.verifyOtp({
     email: email.trim().toLowerCase(),
     token: code.trim(),
@@ -1505,13 +1491,19 @@ document.addEventListener('submit', e => {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeSheet(); closeDrawer(); } });
 window.addEventListener('hashchange', render);
 
-(async () => {
-  try { await seed(); render(); }
-  catch (err) {
-    console.error(err);
-    document.getElementById('view').innerHTML = '<div style="padding:2rem;max-width:520px;margin:auto"><h2 style="font-weight:600">Une erreur est survenue</h2><p style="color:#8b97ab;margin:.5rem 0 1rem">'+String(err && err.message || err)+'</p><button class="btn btn-primary" style="padding:.7rem 1.2rem" onclick="Object.keys(localStorage).filter(k=>k.startsWith(\'ds_\')).forEach(k=>localStorage.removeItem(k));location.reload()">Réinitialiser les données locales</button></div>';
-  }
-})();
+(async () => { await seed(); render(); })();
 </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+  <script>
+  const SUPABASE_URL = 'https://tnxmpubkdbiwihfahcrb.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRueG1wdWJrZGJpd2loZmFoY3JiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEzNTk0MTIsImV4cCI6MjEwNjkzNTQxMn0.8iuS1npbJTSKlb6q9Sp83hmD4I4T6j0XFeIdyYym84Y';
+
+  const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
+</script>
+  
 </body>
 </html>
